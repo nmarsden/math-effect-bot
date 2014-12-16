@@ -1,0 +1,265 @@
+
+
+#tdMap {
+    position: relative;
+    margin: 0 0 0 118px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.main-content-well, .main-content-well-side {
+min-height: 800px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+}
+
+#tdMap .tdCell {
+    width:60px;
+    height:60px;
+    float:left;
+    margin: 2px;
+    border-radius: 4px;
+}
+#tdMap .tdCell.main-road {
+    background-color: #F0E5DF;
+}
+#tdMap .tdCell.side-road {
+    background-color: #ffffcc;
+}
+
+#tdMap .emptyCell {
+    border: 1px solid;
+    position: relative;
+}
+#tdMap .tdUnit {
+    font-size: 20px;
+    line-height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 2px;
+    border-radius: 4px;
+
+    position: absolute;
+    width:60px;
+    height:60px;
+    /*border: 2px solid #C26213;*/
+    background-color: #C26213;
+    z-index: 5;
+}
+
+#tdMap .tdUnit .unitPower {
+    z-index: 5;
+    position: absolute;
+    width:60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+#tdMap .tdUnit.boss {
+    background-color: #C21348;
+}
+
+#tdMap .tdUnit.playerUnit {
+    border: 0px;
+    /*background-color: #30AB22;*/
+    color: #FFFFFF;
+}
+
+/*#tdMap .tdUnit.playerUnit.unit-move-0 { border-radius: 30px 30px 4px 4px; }*/
+/*#tdMap .tdUnit.playerUnit.unit-move-1 { border-radius: 4px 30px 30px 4px; }*/
+/*#tdMap .tdUnit.playerUnit.unit-move-2 { border-radius: 4px 4px 30px 30px; }*/
+/*#tdMap .tdUnit.playerUnit.unit-move-3 { border-radius: 30px 4px 4px 30px; }*/
+/*#tdMap .tdUnit.playerUnit .moveArrow {
+    display:none;
+    background-color: #30AB22;
+}
+#tdMap .tdUnit.playerUnit .moveBlock {
+    display:none;
+    background-color: #30AB22;
+}*/
+
+#tdMap .tdUnit.playerUnit.power-1, #tdMap .tdUnit.playerUnit.power-1 .moveArrow, #tdMap .tdUnit.playerUnit.power-1 .moveBlock {
+    background-color: #8DE984;
+}
+#tdMap .tdUnit.playerUnit.power-2, #tdMap .tdUnit.playerUnit.power-2 .moveArrow, #tdMap .tdUnit.playerUnit.power-2 .moveBlock {
+    background-color: #78DE6D;
+}
+#tdMap .tdUnit.playerUnit.power-3, #tdMap .tdUnit.playerUnit.power-3 .moveArrow, #tdMap .tdUnit.playerUnit.power-3 .moveBlock {
+    background-color: #5FCF53;
+}
+#tdMap .tdUnit.playerUnit.power-4, #tdMap .tdUnit.playerUnit.power-4 .moveArrow, #tdMap .tdUnit.playerUnit.power-4 .moveBlock {
+    background-color: #4ABA3D;
+}
+#tdMap .tdUnit.playerUnit.power-5, #tdMap .tdUnit.playerUnit.power-5 .moveArrow, #tdMap .tdUnit.playerUnit.power-5 .moveBlock {
+    background-color: #30AB22;
+}
+#tdMap .tdUnit.playerUnit.power-6, #tdMap .tdUnit.playerUnit.power-6 .moveArrow, #tdMap .tdUnit.playerUnit.power-6 .moveBlock {
+    background-color: #2C9620;
+}
+#tdMap .tdUnit.playerUnit.power-7, #tdMap .tdUnit.playerUnit.power-7 .moveArrow, #tdMap .tdUnit.playerUnit.power-7 .moveBlock {
+    background-color: #228017;
+}
+#tdMap .tdUnit.playerUnit.power-8, #tdMap .tdUnit.playerUnit.power-8 .moveArrow, #tdMap .tdUnit.playerUnit.power-8 .moveBlock {
+    background-color: #1A6312;
+}
+#tdMap .tdUnit.playerUnit.power-9, #tdMap .tdUnit.playerUnit.power-9 .moveArrow, #tdMap .tdUnit.playerUnit.power-9 .moveBlock {
+    background-color: #175210;
+}
+#tdMap .tdUnit.playerUnit.power-10, #tdMap .tdUnit.playerUnit.power-10 .moveArrow, #tdMap .tdUnit.playerUnit.power-10 .moveBlock {
+    background-color: #113D0C;
+}
+
+#tdMap .tdUnit.playerUnit.unit-move-0 { background: none; }
+#tdMap .tdUnit.playerUnit.unit-move-1 { background: none; }
+#tdMap .tdUnit.playerUnit.unit-move-2 { background: none; }
+#tdMap .tdUnit.playerUnit.unit-move-3 { background: none; }
+
+
+
+#tdMap .tdButton {
+    position: absolute;
+    width:15px;
+    height:15px;
+    color: #000000;
+    z-index: 6;
+}
+
+#tdMap .tdButton.arrow-0{
+    top:-4px;
+    left:22px;
+}
+#tdMap .tdButton.arrow-1{
+    top:21px;
+    left:45px;
+}
+#tdMap .tdButton.arrow-2{
+    top:44px;
+    left:22px;
+}
+#tdMap .tdButton.arrow-3{
+    top:21px;
+    left:-3px;
+}
+#tdMap .tdButton.tdStopButton{
+    top:20px;
+    left:20px;
+    width: 20px;
+    height: 20px;
+}
+
+#tdMap .arrow {
+    position: absolute;
+    top:32px;
+    left:32px;
+    margin: -10px 0px 0px -10px;
+    /*opacity: 0;*/
+    display: none;
+}
+
+#tdMap .arrow.fa-long-arrow-up, #tdMap .arrow.fa-long-arrow-down {
+    left:36px;
+}
+
+#tdMap .bonus{
+    width: 30px;
+    height: 30px;
+    background-color: #bcd42a;
+    position: absolute;
+    border-radius: 30px;
+    line-height: 30px;
+    text-align: center;
+    top: 14px;
+    left: 14px;
+}
+
+#tdMap .bonus.b-minus {
+    background-color: #ED7B61;
+}
+
+
+
+
+#tdMap .tdUnit.playerUnit.unit-move-0 .moveBlock {
+    display: block;
+    position: absolute;
+    width:60px;
+    height:30px;
+    top:30px;
+    border-radius: 0px 0px 4px 4px;
+}
+#tdMap .tdUnit.playerUnit.unit-move-1 .moveBlock {
+    display: block;
+    position: absolute;
+    width:30px;
+    height:60px;
+    top:0px;
+    border-radius: 4px 0px 0px 4px;
+}
+#tdMap .tdUnit.playerUnit.unit-move-2 .moveBlock {
+    display: block;
+    position: absolute;
+    width:60px;
+    height:30px;
+    top:0px;
+    border-radius: 4px 4px 0px 0px;
+}
+#tdMap .tdUnit.playerUnit.unit-move-3 .moveBlock {
+    display: block;
+    position: absolute;
+    width:30px;
+    height:60px;
+    top:0px;
+    left:30px;
+    border-radius: 0px 4px 4px 0px;
+}
+#tdMap .tdUnit.playerUnit.unit-move-0 .moveArrow, 
+#tdMap .tdUnit.playerUnit.unit-move-1 .moveArrow, 
+#tdMap .tdUnit.playerUnit.unit-move-2 .moveArrow, 
+#tdMap .tdUnit.playerUnit.unit-move-3 .moveArrow {
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width:46px;
+    height:46px;
+    border-radius: 9px;
+    top: 7px;
+    left:7px;
+    z-index:1;
+}
+
+
+
+/*  DIALOG */
+
+.result-numbers {
+    color: #113D0C;
+    font-size: 22px;
+}
+
+.result-text {
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.result-title {
+    text-align: center;
+}
+
+
+#modalHowUnitMove .modal-dialog {
+    width: 600px;
+
+}
+
+#MENameFormContainer {
+    text-align: center;
+}

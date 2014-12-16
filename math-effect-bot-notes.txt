@@ -1,0 +1,53 @@
+----------------------------
+--- Original source code ---
+----------------------------
+Math Effect source code on github
+- https://github.com/ilfate/laravel.ilfate.net
+
+-----------
+--- DOM ---
+-----------
+DOM for player and one button
+-----------------------------
+<div class="unit-1 playerUnit">
+  <div class="tdButton fa-arrow-circle-down"></div>
+</div>
+
+DOM for final modal dialog
+--------------------------
+<div id="myModal"
+    <div id="turnsSurvived">10</div>
+    <div id="unitsKilled">2</div>
+    <div id="pointsEarned">16</div>
+
+     <a class="btn">Restart</a>
+</div>
+	 
+---------------------
+--- Code Snippets ---
+---------------------
+Click first player button found
+-------------------------------
+$(".tdButton:visible").first().click()
+
+Output final result
+-------------------
+console.log("[turns: " + $("#turnsSurvived").text() + "][kills: " + $("#unitsKilled").text() + "][points: " + $("#pointsEarned").text() + "]");
+
+// [turns: 5][kills: 2][points: 3]
+
+AutoPlay game forever
+---------------------
+var autoPlay = function () {
+    if ($("#myModal:visible").size() == 0) {
+        $(".tdButton:visible").first().click();
+		setTimeout(autoPlay, 1000);
+    } else {
+        console.log("[turns: " + $("#turnsSurvived").text() + "][kills: " + $("#unitsKilled").text() + "][points: " + $("#pointsEarned").text() + "]");
+		
+		window.location = "http://ilfate.net/MathEffect"
+		setTimeout(autoPlay, 3000);
+	}
+}
+
+setTimeout(autoPlay, 1000);

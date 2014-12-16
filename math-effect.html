@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Math Effect - logic game.</title>
+
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" >
+
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/css/game.css" type="text/css" />
+
+    <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/tdGame.css" rel="stylesheet">
+<link href="/packages/video-js/video-js.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+
+    <meta content="ilfate ilya rubinchik ilya_rubinchik php web developer" name="keywords">
+    <meta content="Rubinchik Ilya`s personal site" name="description">
+    <meta property="og:site_name" content="Ilfate">
+    <meta property="og:title" content="Ilfate - Rubinchik Ilya. Personal Site.">
+    <meta property="og:image" content="/images/ilfate.png">
+
+</head>
+<body>
+
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="packages/bootbox.min.js"></script> -->
+
+<!--  <script type="text/javascript" src="/js/bootstrap-image-gallery.min.js"></script>
+  <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>-->
+
+<script type="text/javascript" src="/js/events.js"></script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/ajax.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/form.js"></script>
+<script type="text/javascript" src="/js/pages.js"></script>
+
+<script type="text/javascript" src="/js/td/td.game.js"></script>
+<script type="text/javascript" src="/js/td/td.facet.js"></script>
+<script type="text/javascript" src="/js/td/td.map.js"></script>
+<script type="text/javascript" src="/js/td/td.map.config.js"></script>
+<script type="text/javascript" src="/js/td/td.unit.js"></script>
+
+<script src="/packages/video-js/video.js"></script>
+<script>
+  videojs.options.flash.swf = "/packages/video-js/video-js.swf"
+</script>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+<!--                <a class="navbar-brand" href="/">Ilfate</a>-->
+
+                <ol class="breadcrumb ilfate-breadcrumb">
+                                            <li class="active" >
+                                                            <a href="/">
+                                                        Home
+                                                            </a>
+                                                    </li>
+                                            <li class="active" >
+                                                            <a href="http://ilfate.net/Games">
+                                                        Games
+                                                            </a>
+                                                    </li>
+                                            <li  >
+                                                        Math Effect
+                                                    </li>
+                                    </ol>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                <ul class="nav navbar-nav">
+                                    </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="main-content-well well well-small ">
+                
+<div class="hero-unit">
+    <h1>MathEffect <small>Defend your base as long as you can!</small></h1>
+</div>
+
+<div id="tdMap"></div>
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- dialog body -->
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="result-title">
+                    Your base belong to enemy now!
+                </h2>
+                <p id="gameStats" class="result-text">
+                    You survived - <span class="result-numbers" id="turnsSurvived"></span> turns!<br>
+                    You killed - <span class="result-numbers" id="unitsKilled"></span> units!<br>
+                    You earned - <span class="result-numbers" id="pointsEarned"></span> points!<br>
+                </p>
+                                <br>
+                <p id="MENameFormContainer">
+                    <form id="MENameForm" class="result-text" method="post" action="">
+                    <!--<form id="MENameForm" class="result-text" method="post" action="http://ilfate.net/MathEffect/saveName">-->
+                        <input type="text" name="name" />
+                        <input type="hidden" name="_token" value="YIT57MI7qQYlo7AbNHOfYrrpwou7LQ3ifBwD24Yf">
+                        <input type="hidden" name="checkKey" id="checkKey" value="d4e26f3138f4b9d3ca4545f71e53f163">
+
+                        <button class="btn btn-primary" type="submit">Save my name</button>
+                    </form>
+                </p>
+                            </div>
+
+            <!-- dialog buttons -->
+            <div class="modal-footer"><a href="http://localhost:8080/math-effect.html" type="button" class="btn btn-primary">Restart</a></div>
+            <!--<div class="modal-footer"><a href="http://ilfate.net/MathEffect" type="button" class="btn btn-primary">Restart</a></div>-->
+        </div>
+    </div>
+</div>
+
+<div id="modalHowUnitMove" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- dialog body -->
+            <div class="modal-body">
+                <a type="button" class="youtube-stop" close" data-dismiss="modal">&times;</a>
+                <br>
+                <br>
+                <iframe width="560" height="315" frameborder="0" data-video="//www.youtube.com/embed/OlJ9VdY9dig" allowfullscreen></iframe>
+                            </div>
+
+            <!-- dialog buttons -->
+            <div class="modal-footer"><a type="button" class="btn btn-primary youtube-stop" data-dismiss="modal">Close</a></div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="col-md-1">
+            
+                            
+        </div>
+        <div class="col-md-3">
+            <div class="main-content-well-side well well-small">
+    
+<h3>Controls</h3>
+Click on <strong>arrows</strong> to give unit command to move<br>
+<h3>Info</h3>
+<button id="modalHowUnitMoveButton" class="btn btn-primary" >How to play</button>
+<h3>Rules</h3>
+<ul>
+    <li>All moving units get +1 power every turn.</li>
+    <li>Your unit on base cell get +1 power every turn.</li>
+    <li>When your base is empty new unit with 1 power will be created for you.</li>
+    <li>All standing units will lose power. Longer they stay, faster they lose power. (except unit on base)</li>
+    <li>If you command unit to move, it will not stop until it hit the wall. </li>
+</ul>
+<!--<h3>Game Leaderboard</h3>-->
+<!--<a href="http://ilfate.net/MathEffect/stats" class="btn btn-primary" >Statistics</a>-->
+
+</div>
+   
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="_token" id="laravel-token" value="YIT57MI7qQYlo7AbNHOfYrrpwou7LQ3ifBwD24Yf">
+
+
+
+
+
+<script>
+//  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+//  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+//  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+//  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+//
+//  ga('create', 'UA-55905052-1', 'auto');
+//  ga('send', 'pageview');
+
+
+</script>
+</body>
+
+</html>
