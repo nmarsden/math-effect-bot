@@ -90,6 +90,8 @@ $(document).ready(function() {
     var checkForSpawnedEnemy = true;
     var trackedEnemies = [];
 
+    var brain;
+
     // -- Constants --
     var directions = ["up","right","down","left"];
     var oppositeDirections = ["down","left","up","right"];
@@ -153,187 +155,248 @@ $(document).ready(function() {
             // Every second turn determine both the direction and the turnNumber in the future the player will need to move in order to kill the newly spawned enemy
             // *** Best Result within 50 iterations: [turns: 26][kills: 9][points: 111]
 
-            if (checkForSpawnedEnemy) {
-                checkForSpawnedEnemy = false;
+            //if (checkForSpawnedEnemy) {
+            //    checkForSpawnedEnemy = false;
+            //
+            //    // Find newly spawned enemy
+            //    //var spawnedEnemy = $(".botUnit .unitPower:contains('1')").parent();
+            //
+            //    var spawnedPower = 1;
+            //    var isBoss = false;
+            //
+            //    var spawnedEnemies = $(".botUnit .unitPower:contains('1')").parent().filter(function (){
+            //        return $(this).css("left") == '0px' || $(this).css("left") == '512px' ||
+            //               $(this).css("top") == '0px' || $(this).css("top") == '512px';
+            //    });
+            //
+            //    // Find boss if spawned enemy with unitPower of 1 is not found
+            //    if (spawnedEnemies.length == 0) {
+            //        // Find boss
+            //        spawnedEnemies = $(".boss").filter(function (){
+            //            return $(this).css("left") == '0px' || $(this).css("left") == '512px' ||
+            //                $(this).css("top") == '0px' || $(this).css("top") == '512px';
+            //        });
+            //        spawnedPower = parseInt(spawnedEnemies.children(".unitPower").text(), 10);
+            //        isBoss = true;
+            //    }
+            //
+            //    var spawnedEnemy = spawnedEnemies[0];
+            //
+            //    var enemyX = Math.floor(spawnedEnemy.offsetLeft / 64);
+            //    var enemyY = Math.floor(spawnedEnemy.offsetTop / 64);
+            //
+            //    // Determine enemy edge position:  0,1,2,3, or 4 ? (where 0 = 'center' and 4 = 'corner')
+            //    var enemyEdgePosition = 0;
+            //
+            //    if (enemyX == 0 || enemyX == 8) {
+            //        enemyEdgePosition = (enemyY <= 4) ? (4 - enemyY) : (enemyY - 4);
+            //    } else if (enemyY == 0 || enemyY == 8) {
+            //        enemyEdgePosition = (enemyX <= 4) ? (4 - enemyX) : (enemyX - 4);
+            //    } else {
+            //        console.log("[turn:" + turn + "] *** Invalid Spawn Position: (" + enemyX + ", " + enemyY + ") ***");
+            //    }
+            //
+            //    //console.log("Spawned Enemy Pos: (" + enemyX + ", " + enemyY + "), Enemy Edge Pos: " + enemyEdgePosition);
+            //
+            //    var movesUntilEnemyKill = edgePosToMovesUntilEnemyKill[enemyEdgePosition];  // 3,4,5,6, or 7 ?
+            //    var killTurn = turn + movesUntilEnemyKill;
+            //
+            //    // Determine kill move: 0,1,2, or 3 ?
+            //    var killMove = enemySpawnPosToKillMove[enemyX][enemyY];
+            //
+            //    //console.log("[turn:" + turn + "] Spawned Enemy Pos: (" + enemyX + ", " + enemyY + "), Kill Move: " + killMove);
+            //
+            //    // Determine unitId: eg.enemy with class 'unit-12' has a unitId of 12
+            //    var unitId = $(spawnedEnemy).attr('class').match(/\bunit-(\d+)\b/)[1];
+            //
+            //    // Add new tracked enemy entry
+            //    trackedEnemies.push({ unitId: unitId, spawnedPower: spawnedPower, spawnedTurn: turn, spawnedPosition: [enemyX, enemyY], isCorner: (enemyEdgePosition == 4), isBoss: isBoss, killTurn: killTurn, killMove: killMove });
+            //} else {
+            //    checkForSpawnedEnemy = true;
+            //
+            //    // Set killMove for bot spawned in the corner. Note: should have moved one square by now
+            //    var trackedEnemyWithoutKillMove = trackedEnemies.filter(function(t) { return t.killMove == null; });
+            //
+            //    if (trackedEnemyWithoutKillMove.length == 1) {
+            //        var enemySelector = ".unit-" + trackedEnemyWithoutKillMove[0].unitId;
+            //        var enemy = $(enemySelector)[0];
+            //        var x = Math.floor(enemy.offsetLeft / 64);
+            //        var y = Math.floor(enemy.offsetTop / 64);
+            //        var spawnedX = trackedEnemyWithoutKillMove[0].spawnedPosition[0];
+            //        var spawnedY = trackedEnemyWithoutKillMove[0].spawnedPosition[1];
+            //
+            //        var cornerKillMove;
+            //        if (spawnedX == 0 && spawnedY == 0) {
+            //            cornerKillMove = (x == 1) ? 3 : 0;
+            //        } else if (spawnedX == 0 && spawnedY == 8) {
+            //            cornerKillMove = (x == 1) ? 3 : 2;
+            //        } else if (spawnedX == 8 && spawnedY == 0) {
+            //            cornerKillMove = (x == 7) ? 1 : 0;
+            //        } else {
+            //            cornerKillMove = (x == 7) ? 1 : 2;
+            //        }
+            //        trackedEnemyWithoutKillMove[0].killMove = cornerKillMove;
+            //    }
+            //}
+            //
+            //// Decide move
+            //var playerButtons = $(".unit-1 .tdButton:visible");
+            //if (playerButtons.size() == 0) {
+            //    //console.log("[turn:" + turn + "] *** unit-1 not found!!!! ****");
+            //    playerButtons = $(".tdButton:visible");
+            //}
+            //
+            //var numberOfButtons = playerButtons.size();
+            //var selectedButtonIndex;
+            //if (previousSelectedDirection == -1) {
+            //
+            //    // Check if killTurn exists for current turn
+            //    var enemiesToKill = trackedEnemies.filter(function(t) { return t.killTurn == turn; });
+            //    var enemiesToKillInOneTurn = trackedEnemies.filter(function(t) { return t.killTurn == turn + 1; });
+            //    var enemiesToKillInThreeTurns = trackedEnemies.filter(function(t) { return t.killTurn == (turn + 3); });
+            //    if (enemiesToKill.length > 0 || enemiesToKillInOneTurn.length > 0) {
+            //        // Select Kill Move button
+            //        var killMove = (enemiesToKill.length > 0) ? enemiesToKill[0].killMove : enemiesToKillInOneTurn[0].killMove;
+            //
+            //        if (enemiesToKill.length > 0) {
+            //            console.log("[turn:" + turn + "] *** Kill enemy entering base - killMove : " + killMove + " ***");
+            //        } else {
+            //            console.log("[turn:" + turn + "] *** Kill enemy next to base - killMove : " + killMove + " ***");
+            //        }
+            //
+            //        var buttonSelector = ".fa-arrow-circle-" + directions[killMove];
+            //        playerButtons = playerButtons.filter(buttonSelector);
+            //        selectedButtonIndex = 0;
+            //        previousSelectedDirection = killMove;
+            //
+            //    } else if (enemiesToKillInThreeTurns.length > 0) {
+            //        // Prepare for future kill move in three turns by NOT moving in the direction opposite to the kill move
+            //        var killMove = enemiesToKillInThreeTurns[0].killMove;
+            //
+            //        var oppositeKillMove = oppositeDirectionIndexes[killMove];
+            //
+            //        // Select Random Button excluding opposite kill move
+            //        do {
+            //            selectedButtonIndex = rand(0, numberOfButtons - 1);
+            //
+            //            for (var i = 0; i < directions.length; i++) {
+            //                if ($(playerButtons.get(selectedButtonIndex)).hasClass("fa-arrow-circle-" + directions[i])) {
+            //                    previousSelectedDirection = i;
+            //                }
+            //            }
+            //        } while (previousSelectedDirection == oppositeKillMove);
+            //
+            //        console.log("[turn:" + turn + "] *** Kill Move in three turns: " + killMove + ", opposite kill move: " + oppositeKillMove + ", selected direction: " + previousSelectedDirection + " ***");
+            //
+            //    } else {
+            //        // Select Random Button
+            //        selectedButtonIndex = rand(0, numberOfButtons - 1);
+            //
+            //        for (var i = 0; i < directions.length; i++) {
+            //            if ($(playerButtons.get(selectedButtonIndex)).hasClass("fa-arrow-circle-" + directions[i])) {
+            //                previousSelectedDirection = i;
+            //            }
+            //        }
+            //        console.log("[turn:" + turn + "] Selected random direction: " + previousSelectedDirection);
+            //    }
+            //} else {
+            //    //console.log("[turn:" + turn + "] Returning to center with direction: " + oppositeDirectionIndexes[previousSelectedDirection]);
+            //
+            //    var oppositeButtonSelector = ".fa-arrow-circle-" + oppositeDirections[previousSelectedDirection];
+            //    playerButtons = playerButtons.filter(oppositeButtonSelector);
+            //    selectedButtonIndex = 0;
+            //    previousSelectedDirection = -1;
+            //}
+            //
+            //if (selectedButtonIndex > playerButtons.length - 1) {
+            //    // This error can happen if two kill moves happen close together in the opposite direction
+            //    console.log("[turn:" + turn + "] *** [Error: Selected Index is out of range!] playerButtons.length: " + playerButtons.length + ", selectedButtonIndex: " + selectedButtonIndex);
+            //
+            //    // Select Random Button to recover
+            //    var playerButtons = $(".unit-1 .tdButton:visible");
+            //    if (playerButtons.size() == 0) {
+            //        //console.log("[turn:" + turn + "] *** unit-1 not found!!!! ****");
+            //        playerButtons = $(".tdButton:visible");
+            //    }
+            //    numberOfButtons = playerButtons.size();
+            //
+            //    selectedButtonIndex = rand(0, numberOfButtons - 1);
+            //
+            //    for (var i = 0; i < directions.length; i++) {
+            //        if ($(playerButtons.get(selectedButtonIndex)).hasClass("fa-arrow-circle-" + directions[i])) {
+            //            previousSelectedDirection = i;
+            //        }
+            //    }
+            //    console.log("[turn:" + turn + "] Recovery! Selected random direction: " + previousSelectedDirection);
+            //}
+            //
+            ////console.log("[turn:" + turn + "] trackedEnemies.length: " + trackedEnemies.length, trackedEnemies);
+            //
+            //playerButtons[selectedButtonIndex].click();
+            //
+            //// Remove tracked enemies if their killTurn has passed
+            //trackedEnemies = trackedEnemies.filter(function(t) { return t.killTurn != turn; });
+            //
+            //turn++;
 
-                // Find newly spawned enemy
-                //var spawnedEnemy = $(".botUnit .unitPower:contains('1')").parent();
 
-                var spawnedPower = 1;
-                var isBoss = false;
+            // *** Technique #5: Reinforced Learning ***
+            // *** Best Result within 50 iterations:
+            // TODO Initialize brain if necessary
+            if (!brain) {
+                var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
+                var num_actions = 80; // a number in the range 0-79 : that is 4 possible actions for one of 20 possible players
+                var temporal_window = 1; // amount of temporal memory. 0 = agent lives in-the-moment :)
+                var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
 
-                var spawnedEnemies = $(".botUnit .unitPower:contains('1')").parent().filter(function (){
-                    return $(this).css("left") == '0px' || $(this).css("left") == '512px' ||
-                           $(this).css("top") == '0px' || $(this).css("top") == '512px';
-                });
+                // the value function network computes a value of taking any of the possible actions
+                // given an input state. Here we specify one explicitly the hard way
+                // but user could also equivalently instead use opt.hidden_layer_sizes = [20,20]
+                // to just insert simple relu hidden layers.
+                var layer_defs = [];
+                layer_defs.push({type: 'input', out_sx: 1, out_sy: 1, out_depth: network_size});
+                layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
+                layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
+                layer_defs.push({type: 'regression', num_neurons: num_actions});
 
-                // Find boss if spawned enemy with unitPower of 1 is not found
-                if (spawnedEnemies.length == 0) {
-                    // Find boss
-                    spawnedEnemies = $(".boss").filter(function (){
-                        return $(this).css("left") == '0px' || $(this).css("left") == '512px' ||
-                            $(this).css("top") == '0px' || $(this).css("top") == '512px';
-                    });
-                    spawnedPower = parseInt(spawnedEnemies.children(".unitPower").text(), 10);
-                    isBoss = true;
-                }
+                // options for the Temporal Difference learner that trains the above net
+                // by backpropping the temporal difference learning rule.
+                var tdtrainer_options = {learning_rate: 0.001, momentum: 0.0, batch_size: 64, l2_decay: 0.01};
 
-                var spawnedEnemy = spawnedEnemies[0];
+                var opt = {};
+                opt.temporal_window = temporal_window;
+                opt.experience_size = 30000;
+                opt.start_learn_threshold = 1000;
+                opt.gamma = 0.7;
+                opt.learning_steps_total = 200000;
+                opt.learning_steps_burnin = 3000;
+                opt.epsilon_min = 0.05;
+                opt.epsilon_test_time = 0.05;
+                opt.layer_defs = layer_defs;
+                opt.tdtrainer_options = tdtrainer_options;
 
-                var enemyX = Math.floor(spawnedEnemy.offsetLeft / 64);
-                var enemyY = Math.floor(spawnedEnemy.offsetTop / 64);
-
-                // Determine enemy edge position:  0,1,2,3, or 4 ? (where 0 = 'center' and 4 = 'corner')
-                var enemyEdgePosition = 0;
-
-                if (enemyX == 0 || enemyX == 8) {
-                    enemyEdgePosition = (enemyY <= 4) ? (4 - enemyY) : (enemyY - 4);
-                } else if (enemyY == 0 || enemyY == 8) {
-                    enemyEdgePosition = (enemyX <= 4) ? (4 - enemyX) : (enemyX - 4);
-                } else {
-                    console.log("[turn:" + turn + "] *** Invalid Spawn Position: (" + enemyX + ", " + enemyY + ") ***");
-                }
-
-                //console.log("Spawned Enemy Pos: (" + enemyX + ", " + enemyY + "), Enemy Edge Pos: " + enemyEdgePosition);
-
-                var movesUntilEnemyKill = edgePosToMovesUntilEnemyKill[enemyEdgePosition];  // 3,4,5,6, or 7 ?
-                var killTurn = turn + movesUntilEnemyKill;
-
-                // Determine kill move: 0,1,2, or 3 ?
-                var killMove = enemySpawnPosToKillMove[enemyX][enemyY];
-
-                //console.log("[turn:" + turn + "] Spawned Enemy Pos: (" + enemyX + ", " + enemyY + "), Kill Move: " + killMove);
-
-                // Determine unitId: eg.enemy with class 'unit-12' has a unitId of 12
-                var unitId = $(spawnedEnemy).attr('class').match(/\bunit-(\d+)\b/)[1];
-
-                // Add new tracked enemy entry
-                trackedEnemies.push({ unitId: unitId, spawnedPower: spawnedPower, spawnedTurn: turn, spawnedPosition: [enemyX, enemyY], isCorner: (enemyEdgePosition == 4), isBoss: isBoss, killTurn: killTurn, killMove: killMove });
-            } else {
-                checkForSpawnedEnemy = true;
-
-                // Set killMove for bot spawned in the corner. Note: should have moved one square by now
-                var trackedEnemyWithoutKillMove = trackedEnemies.filter(function(t) { return t.killMove == null; });
-
-                if (trackedEnemyWithoutKillMove.length == 1) {
-                    var enemySelector = ".unit-" + trackedEnemyWithoutKillMove[0].unitId;
-                    var enemy = $(enemySelector)[0];
-                    var x = Math.floor(enemy.offsetLeft / 64);
-                    var y = Math.floor(enemy.offsetTop / 64);
-                    var spawnedX = trackedEnemyWithoutKillMove[0].spawnedPosition[0];
-                    var spawnedY = trackedEnemyWithoutKillMove[0].spawnedPosition[1];
-
-                    var cornerKillMove;
-                    if (spawnedX == 0 && spawnedY == 0) {
-                        cornerKillMove = (x == 1) ? 3 : 0;
-                    } else if (spawnedX == 0 && spawnedY == 8) {
-                        cornerKillMove = (x == 1) ? 3 : 2;
-                    } else if (spawnedX == 8 && spawnedY == 0) {
-                        cornerKillMove = (x == 7) ? 1 : 0;
-                    } else {
-                        cornerKillMove = (x == 7) ? 1 : 2;
-                    }
-                    trackedEnemyWithoutKillMove[0].killMove = cornerKillMove;
-                }
+                brain = new deepqlearn.Brain(num_inputs, num_actions, opt); // woohoo
             }
 
-            // Decide move
-            var playerButtons = $(".unit-1 .tdButton:visible");
-            if (playerButtons.size() == 0) {
-                //console.log("[turn:" + turn + "] *** unit-1 not found!!!! ****");
-                playerButtons = $(".tdButton:visible");
-            }
+            // TODO Determine game state
 
-            var numberOfButtons = playerButtons.size();
-            var selectedButtonIndex;
-            if (previousSelectedDirection == -1) {
+            // TODO If there is a previously saved game state
+            // TODO 1) Determine award for new game state compared to previously saved game state
+            // TODO 2) Apply reward to brain
+            // brain.backward(reward); // <-- learning magic happens here
 
-                // Check if killTurn exists for current turn
-                var enemiesToKill = trackedEnemies.filter(function(t) { return t.killTurn == turn; });
-                var enemiesToKillInOneTurn = trackedEnemies.filter(function(t) { return t.killTurn == turn + 1; });
-                var enemiesToKillInThreeTurns = trackedEnemies.filter(function(t) { return t.killTurn == (turn + 3); });
-                if (enemiesToKill.length > 0 || enemiesToKillInOneTurn.length > 0) {
-                    // Select Kill Move button
-                    var killMove = (enemiesToKill.length > 0) ? enemiesToKill[0].killMove : enemiesToKillInOneTurn[0].killMove;
+            // TODO Save game state
 
-                    if (enemiesToKill.length > 0) {
-                        console.log("[turn:" + turn + "] *** Kill enemy entering base - killMove : " + killMove + " ***");
-                    } else {
-                        console.log("[turn:" + turn + "] *** Kill enemy next to base - killMove : " + killMove + " ***");
-                    }
+            // TODO Calculate input for brain - 81 board states
 
-                    var buttonSelector = ".fa-arrow-circle-" + directions[killMove];
-                    playerButtons = playerButtons.filter(buttonSelector);
-                    selectedButtonIndex = 0;
-                    previousSelectedDirection = killMove;
 
-                } else if (enemiesToKillInThreeTurns.length > 0) {
-                    // Prepare for future kill move in three turns by NOT moving in the direction opposite to the kill move
-                    var killMove = enemiesToKillInThreeTurns[0].killMove;
+            // TODO Loop until valid action is chosen by brain
+            // TODO 1) Get proposed actions from brain using board states
+            // TODO 2) If invalid action, punish and goto step 1)
+            //var action = brain.forward(array_with_num_inputs_numbers);
 
-                    var oppositeKillMove = oppositeDirectionIndexes[killMove];
 
-                    // Select Random Button excluding opposite kill move
-                    do {
-                        selectedButtonIndex = rand(0, numberOfButtons - 1);
-
-                        for (var i = 0; i < directions.length; i++) {
-                            if ($(playerButtons.get(selectedButtonIndex)).hasClass("fa-arrow-circle-" + directions[i])) {
-                                previousSelectedDirection = i;
-                            }
-                        }
-                    } while (previousSelectedDirection == oppositeKillMove);
-
-                    console.log("[turn:" + turn + "] *** Kill Move in three turns: " + killMove + ", opposite kill move: " + oppositeKillMove + ", selected direction: " + previousSelectedDirection + " ***");
-
-                } else {
-                    // Select Random Button
-                    selectedButtonIndex = rand(0, numberOfButtons - 1);
-
-                    for (var i = 0; i < directions.length; i++) {
-                        if ($(playerButtons.get(selectedButtonIndex)).hasClass("fa-arrow-circle-" + directions[i])) {
-                            previousSelectedDirection = i;
-                        }
-                    }
-                    console.log("[turn:" + turn + "] Selected random direction: " + previousSelectedDirection);
-                }
-            } else {
-                //console.log("[turn:" + turn + "] Returning to center with direction: " + oppositeDirectionIndexes[previousSelectedDirection]);
-
-                var oppositeButtonSelector = ".fa-arrow-circle-" + oppositeDirections[previousSelectedDirection];
-                playerButtons = playerButtons.filter(oppositeButtonSelector);
-                selectedButtonIndex = 0;
-                previousSelectedDirection = -1;
-            }
-
-            if (selectedButtonIndex > playerButtons.length - 1) {
-                // This error can happen if two kill moves happen close together in the opposite direction
-                console.log("[turn:" + turn + "] *** [Error: Selected Index is out of range!] playerButtons.length: " + playerButtons.length + ", selectedButtonIndex: " + selectedButtonIndex);
-
-                // Select Random Button to recover
-                var playerButtons = $(".unit-1 .tdButton:visible");
-                if (playerButtons.size() == 0) {
-                    //console.log("[turn:" + turn + "] *** unit-1 not found!!!! ****");
-                    playerButtons = $(".tdButton:visible");
-                }
-                numberOfButtons = playerButtons.size();
-
-                selectedButtonIndex = rand(0, numberOfButtons - 1);
-
-                for (var i = 0; i < directions.length; i++) {
-                    if ($(playerButtons.get(selectedButtonIndex)).hasClass("fa-arrow-circle-" + directions[i])) {
-                        previousSelectedDirection = i;
-                    }
-                }
-                console.log("[turn:" + turn + "] Recovery! Selected random direction: " + previousSelectedDirection);
-            }
-
-            //console.log("[turn:" + turn + "] trackedEnemies.length: " + trackedEnemies.length, trackedEnemies);
-
-            playerButtons[selectedButtonIndex].click();
-
-            // Remove tracked enemies if their killTurn has passed
-            trackedEnemies = trackedEnemies.filter(function(t) { return t.killTurn != turn; });
+            // TODO Apply valid action to game
 
             turn++;
 

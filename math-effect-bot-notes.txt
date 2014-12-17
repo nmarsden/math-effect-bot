@@ -62,10 +62,15 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html
 
 Questions
 - What actions should be rewarded/punished?
-  a) reward for killing an enemy. a higher reward for the fewer turns the enemy bot has taken (an even higher reward for killing a 'boss' bot)
-  b) reward for collecting bonus points
-  c) punish for collecting negative points
-  d) punish for letting the enemy capture the base
+  a) +5 : reward for killing an enemy. a higher reward for the fewer turns the enemy bot has taken (an even higher reward for killing a 'boss' bot)
+  b) +3 : reward for collecting bonus points
+  c) +1 : reward for increasing player power
+  c) -3 : punish for collecting negative points
+  d) -6 : punish for letting the enemy capture the base
+  e) -6 : punish for invalid action (eg. choosing invalid direction for player; moving player that does not exist;)
+  f) -3 : punish for player not moving and on the edge of the board
+  g) maybe reward for moving towards enemy?
+  h) maybe punish for moving away from enemy?
 
 - What should be the inputs?
   a) 81 (9 x 9) inputs for board state with values...
@@ -75,12 +80,16 @@ Questions
      - 10 = increase power square
      - 11 = decrease power square
 
-- What should be the outputs?
-  a) 5 outputs
-     - player1 action
-     - player2 action
-     - player3 action
-     - player4 action
-     - player5 action
+     where board states are ordered from left to right, top to bottom on the board
 
-     player action values can be 0-4 (0=no move, 1=move up, 2=move right, 3=move down, 3=move left)
+- What should be the outputs?
+  a) 80 actions (a number in the range 0-79) : that is 4 possible actions for one of 20 possible players
+     - 0-3   = player1 (up, right, down, left)
+     - 4-7   = player2 (up, right, down, left)
+     - 8-11  = player3 (up, right, down, left)
+     - 12-15 = player4 (up, right, down, left)
+     - 16-19 = player5 (up, right, down, left)
+     ...
+     - 76-79 = player20 (up, right, down, left)
+
+     where players are ordered from left to right, top to bottom on the board
