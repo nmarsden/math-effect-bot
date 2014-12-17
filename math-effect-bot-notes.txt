@@ -75,10 +75,10 @@ Questions
 - What should be the inputs?
   a) 81 (9 x 9) inputs for board state with values...
      - 0 = empty square
-     - 1-4 = enemy state (0=enemy with moving direction unknown, 1=enemy moving up, 2=enemy moving right, 3=enemy moving down, 4=enemy moving left)
-     - 5-9 = player state (5=player not moving, 6=player moving up, 7=player moving right, 8=player moving down, 9=player moving left)
-     - 10 = increase power square
-     - 11 = decrease power square
+     - 1-5 = player state (1=player not moving, 2=player moving up, 3=player moving right, 4=player moving down, 5=player moving left)
+     - 6-10 = enemy state (0=enemy with moving direction unknown, 1=enemy moving up, 2=enemy moving right, 3=enemy moving down, 4=enemy moving left)
+     - 11 = increase power square
+     - 12 = decrease power square
 
      where board states are ordered from left to right, top to bottom on the board
 
@@ -93,3 +93,74 @@ Questions
      - 76-79 = player20 (up, right, down, left)
 
      where players are ordered from left to right, top to bottom on the board
+
+--------------------------------------
+--- Approach to training the brain ---
+--------------------------------------
+
+Experiment #1: Train the brain to select a player unit that exists
+------------------------------------------------------------------
+a) Using 1 input:
+    - 1 input in the range 1-20 to represent the number of player units
+    - 1 output in the range 0-79
+    - reward brain for outputting an action for a an existing player
+    - punish brain for outputting an action for a non existing player
+    - track reward
+    - reward going consistently up indicates the brain as learned to select an existing player
+
+    eg. For an input of 3,
+        - reward +1 to the brain for an output in the range 0-11
+        - reward -2 to the brain for an output in the range 12-79
+
+b) Using 81 inputs of values 0 or 1:
+    - same as a) except using 81 inputs for board state with values...
+         - 0 = empty square
+         - 1 = player
+
+    eg. For an input of 1,1,1,0,0,0,......0
+        - reward +1 to the brain for an output in the range 0-11
+        - reward -2 to the brain for an output in the range 12-79
+
+c) Using 81 inputs of values 0-5:
+    - same as a) except using 81 inputs for board state with values...
+         - 0 = empty square
+         - 1-5 = player state (1=player not moving, 2=player moving up, 3=player moving right, 4=player moving down, 5=player moving left)
+
+    eg. For an input of 1,2,3,0,0,0,......0
+        - reward +1 to the brain for an output in the range 0-11
+        - reward -2 to the brain for an output in the range 12-79
+
+
+Experiment #2: Train the brain to select a player move that exists
+------------------------------------------------------------------
+    - 81 inputs for board state with values...
+         - 0 = empty square
+         - 1-5 = player state
+             - 1 = not moving
+             - 2 = moving up
+             - 3 = moving right
+             - 4 = moving down
+             - 5 = moving left
+    - 1 output in the range 0-79
+      - 0-3   = player1 (up, right, down, left)
+      - 4-7   = player2 (up, right, down, left)
+      - 8-11  = player3 (up, right, down, left)
+      - 12-79 = player4 .... player20
+    - reward brain for outputting an action for a an existing player
+    - reward brain for outputting an available player move
+    - punish brain for outputting an action for a non existing player
+    - punish brain for outputting a non-available player move
+    - track reward
+    - reward going consistently up indicates the brain as learned to select an existing player
+
+    eg. For an input of 1,2,3,0,0,0,......0
+        Note: This represents
+            - player1: not moving
+            - player2: moving up
+            - player3: moving right
+            - no other players
+        - reward +1 to the brain for an output in the range 0-11
+        - reward +1 to the brain for an output of either 0-3, 5-8, 10-11
+        - reward -2 to the brain for an output in the range 12-79
+        - reward -2 to the brain for an output of either 4 or 9
+

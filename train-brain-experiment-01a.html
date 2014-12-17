@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Train Brain Experiment - 1a</title>
+
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" >
+
+    <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/tdGame.css" rel="stylesheet">
+
+</head>
+<body>
+
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/td/convnet.js"></script>
+<script type="text/javascript" src="/js/td/util.js"></script>
+<script type="text/javascript" src="/js/td/deepqlearn.js"></script>
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="main-content-well well well-small ">
+                
+<div class="hero-unit">
+    <h1>Train Brain Experiment #1</h1>
+
+    <h2>Train the brain to select a player unit that exists</h2>
+    <h3>a) Using 1 input</h3>
+    <ul>
+        <li>1 input in the range 1-20 to represent the number of player units</li>
+        <li>1 output in the range 0-79</li>
+        <li>reward brain for outputting an action for a an existing player</li>
+        <li>punish brain for outputting an action for a non existing player</li>
+        <li>track reward</li>
+        <li>reward going consistently up indicates the brain as learned to select an existing player</li>
+    </ul>
+    eg. For an input of 3,
+    <ul>
+        <li>reward +1 to the brain for an output in the range 0-11</li>
+        <li>reward -2 to the brain for an output in the range 12-79</li>
+    </ul>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
+</body>
+
+</html>
