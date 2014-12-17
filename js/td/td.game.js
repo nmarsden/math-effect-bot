@@ -151,7 +151,6 @@ $(document).ready(function() {
 
             // *** Technique #4: Player moves to kill the enemy if possible, otherwise random move. Next move returns the player to the center ***
             // Every second turn determine both the direction and the turnNumber in the future the player will need to move in order to kill the newly spawned enemy
-            // TODO Get result again, since strategy is now to kill enemies next to base aswell as enemies entering base
             // *** Best Result within 50 iterations: [turns: 26][kills: 9][points: 111]
 
             if (checkForSpawnedEnemy) {
@@ -248,8 +247,6 @@ $(document).ready(function() {
             var numberOfButtons = playerButtons.size();
             var selectedButtonIndex;
             if (previousSelectedDirection == -1) {
-
-                // TODO Also track enemy at next killTurn with the same killMove, since that is the turn when the enemy is actually moving onto the center square and can be killed by moving into the enemy
 
                 // Check if killTurn exists for current turn
                 var enemiesToKill = trackedEnemies.filter(function(t) { return t.killTurn == turn; });

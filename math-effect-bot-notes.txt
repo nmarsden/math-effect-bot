@@ -51,3 +51,36 @@ var autoPlay = function () {
 }
 
 setTimeout(autoPlay, 1000);
+
+-----------------------
+--- Q-Learner Notes ---
+-----------------------
+
+ConvnetJS - Reinforcement Learning Example
+------------------------------------------
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html
+
+Questions
+- What actions should be rewarded/punished?
+  a) reward for killing an enemy. a higher reward for the fewer turns the enemy bot has taken (an even higher reward for killing a 'boss' bot)
+  b) reward for collecting bonus points
+  c) punish for collecting negative points
+  d) punish for letting the enemy capture the base
+
+- What should be the inputs?
+  a) 81 (9 x 9) inputs for board state with values...
+     - 0 = empty square
+     - 1-4 = enemy state (0=enemy with moving direction unknown, 1=enemy moving up, 2=enemy moving right, 3=enemy moving down, 4=enemy moving left)
+     - 5-9 = player state (5=player not moving, 6=player moving up, 7=player moving right, 8=player moving down, 9=player moving left)
+     - 10 = increase power square
+     - 11 = decrease power square
+
+- What should be the outputs?
+  a) 5 outputs
+     - player1 action
+     - player2 action
+     - player3 action
+     - player4 action
+     - player5 action
+
+     player action values can be 0-4 (0=no move, 1=move up, 2=move right, 3=move down, 3=move left)
