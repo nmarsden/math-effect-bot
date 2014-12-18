@@ -248,3 +248,84 @@ Number of inputs to the brain
 
 - Prepare video presentation
 
+
+-------------------
+*** Other Ideas ***
+-------------------
+
+Training a 'Better' brain
+1) Train 10 brains
+2) Choose the top (2 or 5) performing brains as the base for 10 new brains
+3) Repeat step 1)
+
+Measuring a trained brain's performance
+- play the game using the trained brain
+- measure the average score achieved for 50 games
+
+Distributed Learning
+- have multiple computers training brains
+- controlled by a master computer which chooses the best performing brains as the base for new brains to be trained
+
+
+------------------------
+*** Ben's Top Scores ***
+------------------------
+game 1: 14
+game 2: 30
+game 3: 175
+game 4: 96
+game 5: 363
+
+
+---------------------------
+*** Presentation Script ***
+---------------------------
+Introduction
+- The Goal: Create an AI bot which can play the Math Effect game better than a human
+
+- Introducing Math Effect
+    - a single player, turn based, strategy game, where the player must defend their base as long as they can.
+    - every turn the enemy units will move closer to your base, which is positioned in the center of the board
+    - every turn the player must make a decision: which player should I move? and in which direction?
+    - every turn the 'power' of all units on the board increases by 1
+    - every second turn an enemy unit is spawned on the edge of the board
+    - when a player unit and an enemy unit meet, the unit with the least power is 'destroyed'
+
+- Introducing the Human (pic of Ben Birch (aka. Beer Baron)
+    Characteristics
+    - input: optic nerve
+    - brain type: organic
+    - output: hand controls mouse to point and click
+
+- Introducing 'ME Bot' (pic of javascript code?)
+    Characteristics
+    - input: binary
+    - brain type: artificial (Deep Q Learning)
+    - output: binary
+
+- Other characteristics could be 'Strengths', 'Special Skill', 'Weakness' ?  (think of something humorous)
+
+
+Approach Taken
+- Using the javascript library ConvNetJS
+- Implementation is based on the paper 'Playing Atari with Deep Reinforcement Learning' http://arxiv.org/pdf/1312.5602v1.pdf
+- Show the Deep Q Learning Demo http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html
+
+- Show diagram explaining Deep Q Learning Training technique
+   - 1. inputs
+   - 2. brain
+   - 3. outputs
+   - 4. reward
+   - 5. repeat 1.
+
+Results
+- Show 'ME Bot' with trained brain playing Math Effect, displaying highest score
+- Show 'Human' playing Math Effect , displaying highest score
+- Who scored higher 'ME Bot' or 'Human'
+
+
+Conclusion
+- if 'ME Bot' wins - AI will destroy all humans! Be Afraid! ;-)
+- if 'Human' wins - don't worry, AI will not defeat the human race! ;-)
+
+
