@@ -98,11 +98,11 @@ Questions
 --- Approach to training the brain ---
 --------------------------------------
 
-Experiment #1: Train the brain to select a player unit that exists
-------------------------------------------------------------------
-a) Using 1 input:
+Experiment #1: Train the brain to select a player unit that exists using 1 input - different ranges
+---------------------------------------------------------------------------------------------------
+a) Using 1 input in the range 1-20:
     - 1 input in the range 1-20 to represent the number of player units
-    - 1 output in the range 0-79
+    - 80 outputs
     - reward brain for outputting an action for a an existing player
     - punish brain for outputting an action for a non existing player
     - track reward
@@ -112,7 +112,30 @@ a) Using 1 input:
         - reward +1 to the brain for an output in the range 0-11
         - reward -2 to the brain for an output in the range 12-79
 
-b) Using 81 inputs of values 0 or 1:
+b) Using 1 input in the range 1-10:
+    - same as a) except with a reduced input range
+    - 40 outputs
+
+c) Using 1 input in the range 1-5:
+    - same as b) except with a reduced input range
+    - 20 outputs
+
+d) Using 1 input in the range 1-2:
+    - same as c) except with a reduced input range
+    - 8 outputs
+
+
+Experiment #2: Train the brain to select a player unit that exists using 1 input - values 1-2
+---------------------------------------------------------------------------------------------
+Using 1 input in the range 1-2:
+    - 1 input in the range 1-2 to represent the number of player units
+    - 8 outputs
+    - keep training until average reward is > 0.9
+
+
+Experiment #3: Train the brain to select a player unit that exists using 81 inputs - values 0-1
+------------------------------------------------------------------
+a) Using 81 inputs of values 0 or 1:
     - same as a) except using 81 inputs for board state with values...
          - 0 = empty square
          - 1 = player
@@ -121,7 +144,32 @@ b) Using 81 inputs of values 0 or 1:
         - reward +1 to the brain for an output in the range 0-11
         - reward -2 to the brain for an output in the range 12-79
 
-c) Using 81 inputs of values 0-5:
+Outcome:
+- Having 81 inputs takes about 16 seconds per iterations (really slow!)
+- ETA for 160,000 iterations is 106 minutes
+
+
+Experiment #4: Graph Number of Inputs vs Learning Time (for 8000 iterations)
+------------------------------------------------------------------
+Purpose:
+  Determine how the number of inputs used effects the learning time
+
+
+Experiment #5: Train the brain to select a player unit that exists using 81 inputs - values 0-1
+------------------------------------------------------------------
+a) Using 81 inputs of values 0 or 1:
+    - same as a) except using 81 inputs for board state with values...
+         - 0 = empty square
+         - 1 = player
+
+    eg. For an input of 1,1,1,0,0,0,......0
+        - reward +1 to the brain for an output in the range 0-11
+        - reward -2 to the brain for an output in the range 12-79
+
+
+Experiment #6: Train the brain to select a player unit that exists using 81 inputs - values 0-5
+-----------------------------------------------------------------------------------------------
+a) Using 81 inputs of values 0-5:
     - same as a) except using 81 inputs for board state with values...
          - 0 = empty square
          - 1-5 = player state (1=player not moving, 2=player moving up, 3=player moving right, 4=player moving down, 5=player moving left)
@@ -131,7 +179,7 @@ c) Using 81 inputs of values 0-5:
         - reward -2 to the brain for an output in the range 12-79
 
 
-Experiment #2: Train the brain to select a player move that exists
+Experiment #7: Train the brain to select a player move that exists
 ------------------------------------------------------------------
     - 81 inputs for board state with values...
          - 0 = empty square

@@ -1,0 +1,316 @@
+-----------------------------------------------------------------------
+train-brain-experiment-04.js:74 *** Started Learning with 2 inputs: upto max. iterations 8000 ***
+train-brain-experiment-04.js:75 -----------------------------------------------------------------------
+train-brain-experiment-04.js:135 # iterations done: 400, average Reward: 0.295 [time taken: 8.56000000203494]
+train-brain-experiment-04.js:135 # iterations done: 800, average Reward: 0.2425 [time taken: 3.432999990764074]
+train-brain-experiment-04.js:135 # iterations done: 1200, average Reward: 0.34 [time taken: 824.9170000053709]
+train-brain-experiment-04.js:135 # iterations done: 1600, average Reward: 0.2575 [time taken: 1633.1139999965671]
+train-brain-experiment-04.js:135 # iterations done: 2000, average Reward: 0.1225 [time taken: 1639.0149999933783]
+train-brain-experiment-04.js:135 # iterations done: 2400, average Reward: 0.295 [time taken: 1652.1869999996852]
+train-brain-experiment-04.js:135 # iterations done: 2800, average Reward: 0.325 [time taken: 1653.6049999995157]
+train-brain-experiment-04.js:135 # iterations done: 3200, average Reward: 0.1975 [time taken: 1659.456000008504]
+train-brain-experiment-04.js:135 # iterations done: 3600, average Reward: 0.355 [time taken: 1650.4539999878034]
+train-brain-experiment-04.js:135 # iterations done: 4000, average Reward: 0.1975 [time taken: 1651.3040000136243]
+train-brain-experiment-04.js:135 # iterations done: 4400, average Reward: 0.34 [time taken: 1649.000999997952]
+train-brain-experiment-04.js:135 # iterations done: 4800, average Reward: 0.3025 [time taken: 1705.9159999917028]
+train-brain-experiment-04.js:135 # iterations done: 5200, average Reward: 0.325 [time taken: 1657.0150000043213]
+train-brain-experiment-04.js:135 # iterations done: 5600, average Reward: 0.2725 [time taken: 1648.7979999947129]
+train-brain-experiment-04.js:135 # iterations done: 6000, average Reward: 0.235 [time taken: 1663.4950000006938]
+train-brain-experiment-04.js:135 # iterations done: 6400, average Reward: 0.1975 [time taken: 1695.1819999958389]
+train-brain-experiment-04.js:135 # iterations done: 6800, average Reward: 0.28 [time taken: 1672.699000002467]
+train-brain-experiment-04.js:135 # iterations done: 7200, average Reward: 0.3325 [time taken: 1667.2669999970822]
+train-brain-experiment-04.js:135 # iterations done: 7600, average Reward: 0.385 [time taken: 1664.1039999958593]
+train-brain-experiment-04.js:135 # iterations done: 8000, average Reward: 0.4 [time taken: 1668.191000004299]
+train-brain-experiment-04.js:160 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:161 *** Average reward every 400: Number of iterations reached 8000 ***
+train-brain-experiment-04.js:162 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:167 iterations, average_reward
+400,0.295
+800,0.2425
+1200,0.34
+1600,0.2575
+2000,0.1225
+2400,0.295
+2800,0.325
+3200,0.1975
+3600,0.355
+4000,0.1975
+4400,0.34
+4800,0.3025
+5200,0.325
+5600,0.2725
+6000,0.235
+6400,0.1975
+6800,0.28
+7200,0.3325
+7600,0.385
+8000,0.4
+
+train-brain-experiment-04.js:170 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:171 Learning Time (msecs) :29072.781000009854
+train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:73 -----------------------------------------------------------------------
+train-brain-experiment-04.js:74 *** Started Learning with 4 inputs: upto max. iterations 8000 ***
+train-brain-experiment-04.js:75 -----------------------------------------------------------------------
+train-brain-experiment-04.js:135 # iterations done: 400, average Reward: 0.19 [time taken: 1.9060000049648806]
+train-brain-experiment-04.js:135 # iterations done: 800, average Reward: 0.19 [time taken: 1.4109999901847914]
+train-brain-experiment-04.js:135 # iterations done: 1200, average Reward: 0.235 [time taken: 5258.360000007087]
+train-brain-experiment-04.js:135 # iterations done: 1600, average Reward: 0.205 [time taken: 11125.511000005645]
+train-brain-experiment-04.js:135 # iterations done: 2000, average Reward: 0.2275 [time taken: 11351.613999999245]
+train-brain-experiment-04.js:135 # iterations done: 2400, average Reward: 0.355 [time taken: 10936.193000001367]
+train-brain-experiment-04.js:135 # iterations done: 2800, average Reward: 0.28 [time taken: 11179.541000004974]
+train-brain-experiment-04.js:135 # iterations done: 3200, average Reward: 0.265 [time taken: 11391.426000001957]
+train-brain-experiment-04.js:135 # iterations done: 3600, average Reward: 0.295 [time taken: 11198.971000005258]
+train-brain-experiment-04.js:135 # iterations done: 4000, average Reward: 0.25 [time taken: 11180.643999992753]
+train-brain-experiment-04.js:135 # iterations done: 4400, average Reward: 0.25 [time taken: 11186.849000005168]
+train-brain-experiment-04.js:135 # iterations done: 4800, average Reward: 0.2125 [time taken: 11276.309999986552]
+train-brain-experiment-04.js:135 # iterations done: 5200, average Reward: 0.25 [time taken: 11412.03300000052]
+train-brain-experiment-04.js:135 # iterations done: 5600, average Reward: 0.265 [time taken: 11459.344999995665]
+train-brain-experiment-04.js:135 # iterations done: 6000, average Reward: 0.25 [time taken: 11180.896000005305]
+train-brain-experiment-04.js:135 # iterations done: 6400, average Reward: 0.2275 [time taken: 11216.26699999615]
+train-brain-experiment-04.js:135 # iterations done: 6800, average Reward: 0.3175 [time taken: 11176.118999996106]
+train-brain-experiment-04.js:135 # iterations done: 7200, average Reward: 0.295 [time taken: 11200.624999997672]
+train-brain-experiment-04.js:135 # iterations done: 7600, average Reward: 0.355 [time taken: 11109.52399999951]
+train-brain-experiment-04.js:135 # iterations done: 8000, average Reward: 0.1225 [time taken: 11185.498999999254]
+train-brain-experiment-04.js:160 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:161 *** Average reward every 400: Number of iterations reached 8000 ***
+train-brain-experiment-04.js:162 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:167 iterations, average_reward
+400,0.19
+800,0.19
+1200,0.235
+1600,0.205
+2000,0.2275
+2400,0.355
+2800,0.28
+3200,0.265
+3600,0.295
+4000,0.25
+4400,0.25
+4800,0.2125
+5200,0.25
+5600,0.265
+6000,0.25
+6400,0.2275
+6800,0.3175
+7200,0.295
+7600,0.355
+8000,0.1225
+
+train-brain-experiment-04.js:170 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:171 Learning Time (msecs) :196030.1460000046
+train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:73 -----------------------------------------------------------------------
+train-brain-experiment-04.js:74 *** Started Learning with 8 inputs: upto max. iterations 8000 ***
+train-brain-experiment-04.js:75 -----------------------------------------------------------------------
+train-brain-experiment-04.js:135 # iterations done: 400, average Reward: 0.25 [time taken: 1.1660000018309802]
+train-brain-experiment-04.js:135 # iterations done: 800, average Reward: 0.2575 [time taken: 1.1329999979352579]
+train-brain-experiment-04.js:135 # iterations done: 1200, average Reward: 0.205 [time taken: 5761.169000004884]
+train-brain-experiment-04.js:135 # iterations done: 1600, average Reward: 0.235 [time taken: 11560.379999995348]
+train-brain-experiment-04.js:135 # iterations done: 2000, average Reward: 0.28 [time taken: 11557.39000000176]
+train-brain-experiment-04.js:135 # iterations done: 2400, average Reward: 0.1525 [time taken: 11799.239999993006]
+train-brain-experiment-04.js:135 # iterations done: 2800, average Reward: 0.3475 [time taken: 11691.71300000744]
+train-brain-experiment-04.js:135 # iterations done: 3200, average Reward: 0.2575 [time taken: 11422.569999995176]
+train-brain-experiment-04.js:135 # iterations done: 3600, average Reward: 0.3175 [time taken: 11624.969999989844]
+train-brain-experiment-04.js:135 # iterations done: 4000, average Reward: 0.265 [time taken: 11868.203999998514]
+train-brain-experiment-04.js:135 # iterations done: 4400, average Reward: 0.2875 [time taken: 11476.605999996536]
+train-brain-experiment-04.js:135 # iterations done: 4800, average Reward: 0.235 [time taken: 11453.435999996145]
+train-brain-experiment-04.js:135 # iterations done: 5200, average Reward: 0.25 [time taken: 11494.330999994418]
+train-brain-experiment-04.js:135 # iterations done: 5600, average Reward: 0.22 [time taken: 11485.151999993832]
+train-brain-experiment-04.js:135 # iterations done: 6000, average Reward: 0.13 [time taken: 11490.41600000055]
+train-brain-experiment-04.js:135 # iterations done: 6400, average Reward: 0.295 [time taken: 11572.521000009147]
+train-brain-experiment-04.js:135 # iterations done: 6800, average Reward: 0.3325 [time taken: 11554.235999996308]
+train-brain-experiment-04.js:135 # iterations done: 7200, average Reward: 0.28 [time taken: 11498.999999996158]
+train-brain-experiment-04.js:135 # iterations done: 7600, average Reward: 0.3175 [time taken: 11439.094999994268]
+train-brain-experiment-04.js:135 # iterations done: 8000, average Reward: 0.1675 [time taken: 11445.67499999539]
+train-brain-experiment-04.js:160 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:161 *** Average reward every 400: Number of iterations reached 8000 ***
+train-brain-experiment-04.js:162 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:167 iterations, average_reward
+400,0.25
+800,0.2575
+1200,0.205
+1600,0.235
+2000,0.28
+2400,0.1525
+2800,0.3475
+3200,0.2575
+3600,0.3175
+4000,0.265
+4400,0.2875
+4800,0.235
+5200,0.25
+5600,0.22
+6000,0.13
+6400,0.295
+6800,0.3325
+7200,0.28
+7600,0.3175
+8000,0.1675
+
+train-brain-experiment-04.js:170 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:171 Learning Time (msecs) :202199.40700000734
+train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:73 -----------------------------------------------------------------------
+train-brain-experiment-04.js:74 *** Started Learning with 16 inputs: upto max. iterations 8000 ***
+train-brain-experiment-04.js:75 -----------------------------------------------------------------------
+train-brain-experiment-04.js:135 # iterations done: 400, average Reward: 0.325 [time taken: 1.5789999888511375]
+train-brain-experiment-04.js:135 # iterations done: 800, average Reward: 0.2275 [time taken: 1.5629999979864806]
+train-brain-experiment-04.js:135 # iterations done: 1200, average Reward: 0.2575 [time taken: 5858.334999997169]
+train-brain-experiment-04.js:135 # iterations done: 1600, average Reward: 0.445 [time taken: 11885.135999997146]
+train-brain-experiment-04.js:135 # iterations done: 2000, average Reward: 0.325 [time taken: 11950.173000004725]
+train-brain-experiment-04.js:135 # iterations done: 2400, average Reward: 0.2125 [time taken: 11855.964000002132]
+train-brain-experiment-04.js:135 # iterations done: 2800, average Reward: 0.1375 [time taken: 11844.200999999885]
+train-brain-experiment-04.js:135 # iterations done: 3200, average Reward: 0.205 [time taken: 11806.133000005502]
+train-brain-experiment-04.js:135 # iterations done: 3600, average Reward: 0.1075 [time taken: 11796.539000002667]
+train-brain-experiment-04.js:135 # iterations done: 4000, average Reward: 0.355 [time taken: 12045.110999999451]
+train-brain-experiment-04.js:135 # iterations done: 4400, average Reward: 0.25 [time taken: 11934.57500000659]
+train-brain-experiment-04.js:135 # iterations done: 4800, average Reward: 0.205 [time taken: 11856.239999993704]
+train-brain-experiment-04.js:135 # iterations done: 5200, average Reward: 0.3475 [time taken: 11801.11400000169]
+train-brain-experiment-04.js:135 # iterations done: 5600, average Reward: 0.3025 [time taken: 11805.49099999189]
+train-brain-experiment-04.js:135 # iterations done: 6000, average Reward: 0.25 [time taken: 11806.189999988419]
+train-brain-experiment-04.js:135 # iterations done: 6400, average Reward: 0.28 [time taken: 11883.107000001473]
+train-brain-experiment-04.js:135 # iterations done: 6800, average Reward: 0.19 [time taken: 11794.72099999839]
+train-brain-experiment-04.js:135 # iterations done: 7200, average Reward: 0.31 [time taken: 11884.963000004063]
+train-brain-experiment-04.js:135 # iterations done: 7600, average Reward: 0.265 [time taken: 11794.6179999999]
+train-brain-experiment-04.js:135 # iterations done: 8000, average Reward: 0.19 [time taken: 11910.882999989553]
+train-brain-experiment-04.js:160 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:161 *** Average reward every 400: Number of iterations reached 8000 ***
+train-brain-experiment-04.js:162 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:167 iterations, average_reward
+400,0.325
+800,0.2275
+1200,0.2575
+1600,0.445
+2000,0.325
+2400,0.2125
+2800,0.1375
+3200,0.205
+3600,0.1075
+4000,0.355
+4400,0.25
+4800,0.205
+5200,0.3475
+5600,0.3025
+6000,0.25
+6400,0.28
+6800,0.19
+7200,0.31
+7600,0.265
+8000,0.19
+
+train-brain-experiment-04.js:170 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:171 Learning Time (msecs) :207517.70099998976
+train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:73 -----------------------------------------------------------------------
+train-brain-experiment-04.js:74 *** Started Learning with 32 inputs: upto max. iterations 8000 ***
+train-brain-experiment-04.js:75 -----------------------------------------------------------------------
+train-brain-experiment-04.js:135 # iterations done: 400, average Reward: 0.22 [time taken: 2.479000002495013]
+train-brain-experiment-04.js:135 # iterations done: 800, average Reward: 0.235 [time taken: 2.4130000092554837]
+train-brain-experiment-04.js:135 # iterations done: 1200, average Reward: 0.1075 [time taken: 6370.872999992571]
+train-brain-experiment-04.js:135 # iterations done: 1600, average Reward: 0.1675 [time taken: 12772.65100000659]
+train-brain-experiment-04.js:135 # iterations done: 2000, average Reward: 0.145 [time taken: 14988.12400001043]
+train-brain-experiment-04.js:135 # iterations done: 2400, average Reward: 0.31 [time taken: 12754.292999990867]
+train-brain-experiment-04.js:135 # iterations done: 2800, average Reward: 0.2875 [time taken: 12728.574000007939]
+train-brain-experiment-04.js:135 # iterations done: 3200, average Reward: 0.25 [time taken: 12671.698999998625]
+train-brain-experiment-04.js:135 # iterations done: 3600, average Reward: 0.2275 [time taken: 12648.027000002912]
+train-brain-experiment-04.js:135 # iterations done: 4000, average Reward: 0.3175 [time taken: 12593.085000000428]
+train-brain-experiment-04.js:135 # iterations done: 4400, average Reward: 0.2125 [time taken: 12659.96799999266]
+train-brain-experiment-04.js:135 # iterations done: 4800, average Reward: 0.265 [time taken: 12964.772999999695]
+train-brain-experiment-04.js:135 # iterations done: 5200, average Reward: 0.31 [time taken: 12621.094999994966]
+train-brain-experiment-04.js:135 # iterations done: 5600, average Reward: 0.37 [time taken: 12645.948000004864]
+train-brain-experiment-04.js:135 # iterations done: 6000, average Reward: 0.2575 [time taken: 12665.976000003866]
+train-brain-experiment-04.js:135 # iterations done: 6400, average Reward: 0.25 [time taken: 12620.014000000083]
+train-brain-experiment-04.js:135 # iterations done: 6800, average Reward: 0.2725 [time taken: 12656.199000004563]
+train-brain-experiment-04.js:135 # iterations done: 7200, average Reward: 0.1825 [time taken: 12699.61099998909]
+train-brain-experiment-04.js:135 # iterations done: 7600, average Reward: 0.3325 [time taken: 12982.661999994889]
+train-brain-experiment-04.js:135 # iterations done: 8000, average Reward: 0.1975 [time taken: 12990.441000001738]
+train-brain-experiment-04.js:160 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:161 *** Average reward every 400: Number of iterations reached 8000 ***
+train-brain-experiment-04.js:162 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:167 iterations, average_reward
+400,0.22
+800,0.235
+1200,0.1075
+1600,0.1675
+2000,0.145
+2400,0.31
+2800,0.2875
+3200,0.25
+3600,0.2275
+4000,0.3175
+4400,0.2125
+4800,0.265
+5200,0.31
+5600,0.37
+6000,0.2575
+6400,0.25
+6800,0.2725
+7200,0.1825
+7600,0.3325
+8000,0.1975
+
+train-brain-experiment-04.js:170 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:171 Learning Time (msecs) :225039.91600000882
+train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:73 -----------------------------------------------------------------------
+train-brain-experiment-04.js:74 *** Started Learning with 64 inputs: upto max. iterations 8000 ***
+train-brain-experiment-04.js:75 -----------------------------------------------------------------------
+train-brain-experiment-04.js:135 # iterations done: 400, average Reward: 0.31 [time taken: 4.940999991958961]
+train-brain-experiment-04.js:135 # iterations done: 800, average Reward: 0.28 [time taken: 4.0250000020023435]
+train-brain-experiment-04.js:135 # iterations done: 1200, average Reward: 0.3025 [time taken: 7881.884999995236]
+train-brain-experiment-04.js:135 # iterations done: 1600, average Reward: 0.2275 [time taken: 15628.305999998702]
+train-brain-experiment-04.js:135 # iterations done: 2000, average Reward: 0.3475 [time taken: 15445.340999998734]
+train-brain-experiment-04.js:135 # iterations done: 2400, average Reward: 0.1525 [time taken: 15139.030999998795]
+train-brain-experiment-04.js:135 # iterations done: 2800, average Reward: 0.205 [time taken: 15328.347000002395]
+train-brain-experiment-04.js:135 # iterations done: 3200, average Reward: 0.2275 [time taken: 15165.024000001722]
+train-brain-experiment-04.js:135 # iterations done: 3600, average Reward: 0.2575 [time taken: 15118.254000000888]
+train-brain-experiment-04.js:135 # iterations done: 4000, average Reward: 0.2425 [time taken: 15047.561999992467]
+train-brain-experiment-04.js:135 # iterations done: 4400, average Reward: 0.25 [time taken: 15038.945000007516]
+train-brain-experiment-04.js:135 # iterations done: 4800, average Reward: 0.175 [time taken: 15029.55700000166]
+train-brain-experiment-04.js:135 # iterations done: 5200, average Reward: 0.2575 [time taken: 14973.38700000546]
+train-brain-experiment-04.js:135 # iterations done: 5600, average Reward: 0.2425 [time taken: 14988.066000005347]
+train-brain-experiment-04.js:135 # iterations done: 6000, average Reward: 0.205 [time taken: 14951.205000004848]
+train-brain-experiment-04.js:135 # iterations done: 6400, average Reward: 0.325 [time taken: 14962.560999993235]
+train-brain-experiment-04.js:135 # iterations done: 6800, average Reward: 0.2125 [time taken: 14969.396000000415]
+train-brain-experiment-04.js:135 # iterations done: 7200, average Reward: 0.2425 [time taken: 14938.45099999453]
+train-brain-experiment-04.js:135 # iterations done: 7600, average Reward: 0.2725 [time taken: 14905.822000000626]
+train-brain-experiment-04.js:135 # iterations done: 8000, average Reward: 0.265 [time taken: 14908.478999990504]
+train-brain-experiment-04.js:160 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:161 *** Average reward every 400: Number of iterations reached 8000 ***
+train-brain-experiment-04.js:162 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:167 iterations, average_reward
+400,0.31
+800,0.28
+1200,0.3025
+1600,0.2275
+2000,0.3475
+2400,0.1525
+2800,0.205
+3200,0.2275
+3600,0.2575
+4000,0.2425
+4400,0.25
+4800,0.175
+5200,0.2575
+5600,0.2425
+6000,0.205
+6400,0.325
+6800,0.2125
+7200,0.2425
+7600,0.2725
+8000,0.265
+
+train-brain-experiment-04.js:170 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:171 Learning Time (msecs) :264429.6299999987
+train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:180 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:181 Number of inputs vs Learning Time (for 4000 iterations)
+train-brain-experiment-04.js:182 -------------------------------------------------------------------------------------
+train-brain-experiment-04.js:187 num_inputs, learning_time
+1,29072.781000009854
+2,196030.1460000046
+3,202199.40700000734
+4,207517.70099998976
+5,225039.91600000882
+6,264429.6299999987

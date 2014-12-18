@@ -1,63 +1,20 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Train Brain Experiment - 1a</title>
+function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
+function train_brain() {
 
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" >
+    var NUM_PLAYER_UNITS = 2;
+    var NUM_TURNS = 120000;
+    var MAX_AVERAGE_REWARD = 0.9
+    var AVERAGE_WINDOW_SIZE = 400;
+    var REWARD_GOOD_ACTION = 1;
+    var PUNISH_BAD_ACTION = -2;
 
-    <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="css/tdGame.css" rel="stylesheet">
-
-</head>
-<body>
-
-<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="/js/td/convnet.js"></script>
-<script type="text/javascript" src="/js/td/util.js"></script>
-<script type="text/javascript" src="/js/td/deepqlearn.js"></script>
-
-<div class="container main">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="main-content-well well well-small ">
-                
-<div class="hero-unit">
-    <h1>Train Brain Experiment #1</h1>
-
-    <h2>Train the brain to select a player unit that exists</h2>
-    <h3>a) Using 1 input with range 1-10 and 1 output in the range 0-79</h3>
-    <ul>
-        <li>1 input in the range 1-20 to represent the number of player units</li>
-        <li>1 output in the range 0-79</li>
-        <li>reward brain for outputting an action for a an existing player</li>
-        <li>punish brain for outputting an action for a non existing player</li>
-        <li>track reward</li>
-        <li>reward going consistently up indicates the brain as learned to select an existing player</li>
-    </ul>
-    eg. For an input of 3,
-    <ul>
-        <li>reward +1 to the brain for an output in the range 0-11</li>
-        <li>reward -2 to the brain for an output in the range 12-79</li>
-    </ul>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function rand(min, max) {
-        return Math.floor(Math.random()*(max-min+1)+min);
-    }
 
     // Initialize brain if necessary
-    var num_inputs = 1;   // 1 input in the range 1-20 to represent the number of player units
-    var num_actions = 80;  // 1 output in the range 0-79
+    var num_inputs = 81;   // 81 inputs in the range 0-1 to represent the position of player units on the board
+    var num_actions = 4 * NUM_PLAYER_UNITS;  // 1 output in the range 0-7
 
 //    var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
 //    var num_actions = 80; // a number in the range 0-79 : that is 4 possible actions for one of 20 possible players
@@ -93,39 +50,51 @@
 
     var brain = new deepqlearn.Brain(num_inputs, num_actions, opt); // woohoo
 
-    var array_with_num_inputs_numbers = new Array(1);
+    var array_with_num_inputs_numbers = new Array(num_inputs);
     var isValidAction;
     var action;
     var reward;
-    var turn;
+    var turn = 0;
     //var trackedRewards = [];
     var rewardsSum = 0;
     var rewardsOutput;
     var averageReward;
     var trackAverageRewards = [];
-
-    var NUM_TURNS = 120000;
-    var AVERAGE_WINDOW_SIZE = 400;
-    var REWARD_GOOD_ACTION = 1;
-    var PUNISH_BAD_ACTION = -2;
+    var maxAverageRewardReached = false;
 
 
     window.performance.mark('mark_start_learning');
 
-    console.log("Attempt # 28");
-    console.log("---------------------------------------------------------");
-    console.log("*** Started Learning using " + NUM_TURNS + " iterations ***");
-    console.log("---------------------------------------------------------");
 
-    for (turn=0; turn<NUM_TURNS; turn++) {
-        // generate random input in range 1-20
-        array_with_num_inputs_numbers[0] = rand(1, 20);
+    console.log("Attempt # 33");
+    console.log("-----------------------------------------------------------------------");
+    console.log("*** Started Learning: upto max. average rewards reaches " + MAX_AVERAGE_REWARD + " ***");
+    console.log("-----------------------------------------------------------------------");
+
+    //debugger;
+    window.performance.mark('mark_start_average_window');
+
+    while (!maxAverageRewardReached) {
+
+        //for (turn=0; turn<NUM_TURNS; turn++) {
+        turn++;
+
+        // initialize inputs to zeros
+        array_with_num_inputs_numbers = array_with_num_inputs_numbers.map(function() { return 0; });
+        // set some inputs to 1
+        var numberOfPlayers = rand(1, NUM_PLAYER_UNITS);
+        var numOfP;
+        while ((numOfP = array_with_num_inputs_numbers.filter(function (x) {
+            return x == 1;
+        }).length) != numberOfPlayers) {
+            array_with_num_inputs_numbers[rand(0, num_inputs - 1)] = 1;
+        }
 
         // Get action from brain
         action = brain.forward(array_with_num_inputs_numbers);
 
         // check if action is valid for input
-        isValidAction = action < (4 * array_with_num_inputs_numbers[0]);
+        isValidAction = action < (4 * numberOfPlayers);
 
         reward = isValidAction ? REWARD_GOOD_ACTION : PUNISH_BAD_ACTION;
 
@@ -136,10 +105,21 @@
         brain.backward(reward); // <-- learning magic happens here
 
         if (turn % AVERAGE_WINDOW_SIZE == 0) {
+            window.performance.mark('mark_stop_average_window');
+            window.performance.measure('measure_average_window_time', 'mark_start_average_window', 'mark_stop_average_window');
+            var window_time = window.performance.getEntriesByName('measure_average_window_time');
+
+            window.performance.clearMarks('mark_start_average_window');
+            window.performance.clearMarks('mark_stop_average_window');
+            window.performance.clearMeasures('measure_average_window_time');
+
+            window.performance.mark('mark_start_average_window');
+
             // Track average reward for AVERAGE_WINDOW_SIZE iterations
             averageReward = rewardsSum / AVERAGE_WINDOW_SIZE;
             //averageReward = trackedRewards.reduce(function(a, b) { return a + b }) / AVERAGE_WINDOW_SIZE;
             // averageReward = trackedRewards.slice(-AVERAGE_WINDOW_SIZE).reduce(function(a, b) { return a + b }) / AVERAGE_WINDOW_SIZE;
+
 
             trackAverageRewards.push(averageReward);
 
@@ -148,13 +128,19 @@
             rewardsSum = 0;
 
             // output progress
-            console.log("# iterations done: " + turn + ", average Reward: " + averageReward);
+            console.log("# iterations done: " + turn + ", average Reward: " + averageReward + " [time taken: " + window_time[0].duration + "]");
+
+            if (averageReward > MAX_AVERAGE_REWARD) {
+                maxAverageRewardReached = true;
+            }
         }
     }
 
     window.performance.mark('mark_stop_learning');
     window.performance.measure('measure_learning_time', 'mark_start_learning', 'mark_stop_learning');
 
+
+    //console.timeEnd(TIMER_NAME);
 
     // output reward values
 //    console.log("---------------------------------");
@@ -168,11 +154,11 @@
 
     // output average reward values
     console.log("-------------------------------------------------------------------------------------");
-    console.log("*** Average reward every " + AVERAGE_WINDOW_SIZE + " iterations for a total of " + NUM_TURNS + " iterations ***");
+    console.log("*** Average reward every " + AVERAGE_WINDOW_SIZE + ": Average reward reached " + averageReward + " ***");
     console.log("-------------------------------------------------------------------------------------");
     rewardsOutput = "iterations, average_reward\n";
-    for (turn=0; turn<trackAverageRewards.length; turn++) {
-        rewardsOutput += ((turn+1)*AVERAGE_WINDOW_SIZE) + "," + trackAverageRewards[turn] + "\n";
+    for (turn = 0; turn < trackAverageRewards.length; turn++) {
+        rewardsOutput += ((turn + 1) * AVERAGE_WINDOW_SIZE) + "," + trackAverageRewards[turn] + "\n";
     }
     console.log(rewardsOutput);
 
@@ -181,7 +167,4 @@
     console.log("Learning Time (msecs) :" + learningTime[0].duration);
     console.log("-------------------------------------------------------------------------------------");
 
-</script>
-</body>
-
-</html>
+}

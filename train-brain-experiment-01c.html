@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Train Brain Experiment - 1a</title>
+    <title>Train Brain Experiment - 1c</title>
 
 
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" >
@@ -29,10 +29,10 @@
     <h1>Train Brain Experiment #1</h1>
 
     <h2>Train the brain to select a player unit that exists</h2>
-    <h3>a) Using 1 input with range 1-10 and 1 output in the range 0-79</h3>
+    <h3>c) Using 1 input with range 1-5 and 1 output in the range 0-19</h3>
     <ul>
-        <li>1 input in the range 1-20 to represent the number of player units</li>
-        <li>1 output in the range 0-79</li>
+        <li>1 input in the range 1-5 to represent the number of player units</li>
+        <li>1 output in the range 0-19</li>
         <li>reward brain for outputting an action for a an existing player</li>
         <li>punish brain for outputting an action for a non existing player</li>
         <li>track reward</li>
@@ -41,7 +41,7 @@
     eg. For an input of 3,
     <ul>
         <li>reward +1 to the brain for an output in the range 0-11</li>
-        <li>reward -2 to the brain for an output in the range 12-79</li>
+        <li>reward -2 to the brain for an output in the range 12-19</li>
     </ul>
 </div>
 
@@ -54,10 +54,16 @@
     function rand(min, max) {
         return Math.floor(Math.random()*(max-min+1)+min);
     }
+    var NUM_PLAYER_UNITS = 5;
+    var NUM_TURNS = 120000;
+    var AVERAGE_WINDOW_SIZE = 400;
+    var REWARD_GOOD_ACTION = 1;
+    var PUNISH_BAD_ACTION = -2;
+
 
     // Initialize brain if necessary
-    var num_inputs = 1;   // 1 input in the range 1-20 to represent the number of player units
-    var num_actions = 80;  // 1 output in the range 0-79
+    var num_inputs = 1;   // 1 input in the range 1-10 to represent the number of player units
+    var num_actions = 4 * NUM_PLAYER_UNITS;  // 1 output in the range 0-39
 
 //    var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
 //    var num_actions = 80; // a number in the range 0-79 : that is 4 possible actions for one of 20 possible players
@@ -104,22 +110,18 @@
     var averageReward;
     var trackAverageRewards = [];
 
-    var NUM_TURNS = 120000;
-    var AVERAGE_WINDOW_SIZE = 400;
-    var REWARD_GOOD_ACTION = 1;
-    var PUNISH_BAD_ACTION = -2;
-
 
     window.performance.mark('mark_start_learning');
 
-    console.log("Attempt # 28");
+
+    console.log("Attempt # 27");
     console.log("---------------------------------------------------------");
     console.log("*** Started Learning using " + NUM_TURNS + " iterations ***");
     console.log("---------------------------------------------------------");
 
     for (turn=0; turn<NUM_TURNS; turn++) {
-        // generate random input in range 1-20
-        array_with_num_inputs_numbers[0] = rand(1, 20);
+        // generate random input in range 1-10
+        array_with_num_inputs_numbers[0] = rand(1, NUM_PLAYER_UNITS);
 
         // Get action from brain
         action = brain.forward(array_with_num_inputs_numbers);
@@ -155,6 +157,8 @@
     window.performance.mark('mark_stop_learning');
     window.performance.measure('measure_learning_time', 'mark_start_learning', 'mark_stop_learning');
 
+
+    //console.timeEnd(TIMER_NAME);
 
     // output reward values
 //    console.log("---------------------------------");
