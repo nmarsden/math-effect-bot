@@ -305,12 +305,12 @@ train-brain-experiment-04.js:170 -----------------------------------------------
 train-brain-experiment-04.js:171 Learning Time (msecs) :264429.6299999987
 train-brain-experiment-04.js:172 -------------------------------------------------------------------------------------
 train-brain-experiment-04.js:180 -------------------------------------------------------------------------------------
-train-brain-experiment-04.js:181 Number of inputs vs Learning Time (for 4000 iterations)
+train-brain-experiment-04.js:181 Number of inputs vs Learning Time (for 8000 iterations)
 train-brain-experiment-04.js:182 -------------------------------------------------------------------------------------
 train-brain-experiment-04.js:187 num_inputs, learning_time
-1,29072.781000009854
-2,196030.1460000046
-3,202199.40700000734
-4,207517.70099998976
-5,225039.91600000882
-6,264429.6299999987
+2,29
+4,196
+8,202
+16,207
+32,225
+64,264

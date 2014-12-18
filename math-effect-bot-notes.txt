@@ -154,8 +154,21 @@ Experiment #4: Graph Number of Inputs vs Learning Time (for 8000 iterations)
 Purpose:
   Determine how the number of inputs used effects the learning time
 
+Result
+- Having 8 inputs takes about 67 mins to do 160,000 iterations
+- Having 16 inputs takes about 69 mins to do 160,000 iterations
 
-Experiment #5: Train the brain to select a player unit that exists using 81 inputs - values 0-1
+
+Experiment #5: Train with 9 inputs
+----------------------------------
+- each input represents 9 board square states which have been binary encoded into 36 bits (9 x 4 bits)
+
+According to this article the maximum integer which can be represented in javascript is Math.pow(2, 53)
+http://www.2ality.com/2012/04/number-encoding.html
+
+
+
+Experiment #6: Train the brain to select a player unit that exists using 81 inputs - values 0-1
 ------------------------------------------------------------------
 a) Using 81 inputs of values 0 or 1:
     - same as a) except using 81 inputs for board state with values...
@@ -167,7 +180,7 @@ a) Using 81 inputs of values 0 or 1:
         - reward -2 to the brain for an output in the range 12-79
 
 
-Experiment #6: Train the brain to select a player unit that exists using 81 inputs - values 0-5
+Experiment #7: Train the brain to select a player unit that exists using 81 inputs - values 0-5
 -----------------------------------------------------------------------------------------------
 a) Using 81 inputs of values 0-5:
     - same as a) except using 81 inputs for board state with values...
@@ -179,7 +192,7 @@ a) Using 81 inputs of values 0-5:
         - reward -2 to the brain for an output in the range 12-79
 
 
-Experiment #7: Train the brain to select a player move that exists
+Experiment #8: Train the brain to select a player move that exists
 ------------------------------------------------------------------
     - 81 inputs for board state with values...
          - 0 = empty square
@@ -211,4 +224,27 @@ Experiment #7: Train the brain to select a player move that exists
         - reward +1 to the brain for an output of either 0-3, 5-8, 10-11
         - reward -2 to the brain for an output in the range 12-79
         - reward -2 to the brain for an output of either 4 or 9
+
+----------------------
+*** Decisions Made ***
+----------------------
+
+Game State should be determined from javascript game internals
+- For training purposes I'll need to read the game state from the game internals to improve training times
+- Once the brain is fully trained and performance is not an issue, game state could be read
+  from the DOM so that the AI bot can executed as a bookmarklet on the actual Math Effect website
+
+Number of inputs to the brain
+- Found that the more inputs to the brain, the longer it takes to train
+- Instead of 81 inputs, reduced to 9 inputs using binary encoding
+
+
+-------------
+*** Tasks ***
+-------------
+
+- Alter Math Effect so that when training the UI is not updated, otherwise its too slow!
+- Read game state from the game internals when training the brain
+
+- Prepare video presentation
 
