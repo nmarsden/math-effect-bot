@@ -243,7 +243,10 @@ Number of inputs to the brain
 *** Tasks ***
 -------------
 
-- Alter Math Effect so that when training the UI is not updated, otherwise its too slow!
+- Alter Math Effect
+    - Have 'Training Mode' - trains brain and does NOT update the UI
+    - Have 'AutoPlay Mode' - uses the trained brain to play the game with normal UI updates
+
 - Read game state from the game internals when training the brain
 
 - Prepare video presentation
@@ -275,6 +278,10 @@ game 2: 30
 game 3: 175
 game 4: 96
 game 5: 363
+game 6: 125
+game 7: 56
+game 8: 356
+game 9: 1446  <-- Top Score!
 
 
 ---------------------------
