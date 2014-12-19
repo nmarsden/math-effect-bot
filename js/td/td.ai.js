@@ -469,8 +469,6 @@ TD.AI = function (game) {
 
             // Restart game
             this.game.init();
-
-            //setTimeout(this.train.bind(this), 1000);
         }
 
     };

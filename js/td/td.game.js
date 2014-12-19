@@ -146,8 +146,12 @@ TD.Game = function (situation) {
                 }
             }
         }
-        this.currentMap.drawMap();
-        this.currentMap.draw(this.units);
+
+        // Only draw map if NOT training
+        if (!this.ai.isTraining) {
+            this.currentMap.drawMap();
+            this.currentMap.draw(this.units);
+        }
 
         this.ai.train();
     }
