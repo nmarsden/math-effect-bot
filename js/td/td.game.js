@@ -340,65 +340,88 @@ $(document).ready(function() {
             //turn++;
 
 
-            // *** Technique #5: Reinforced Learning ***
-            // *** Best Result within 50 iterations:
-            // TODO Initialize brain if necessary
-            if (!brain) {
-                var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
-                var num_actions = 80; // a number in the range 0-79 : that is 4 possible actions for one of 20 possible players
-                var temporal_window = 1; // amount of temporal memory. 0 = agent lives in-the-moment :)
-                var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
-
-                // the value function network computes a value of taking any of the possible actions
-                // given an input state. Here we specify one explicitly the hard way
-                // but user could also equivalently instead use opt.hidden_layer_sizes = [20,20]
-                // to just insert simple relu hidden layers.
-                var layer_defs = [];
-                layer_defs.push({type: 'input', out_sx: 1, out_sy: 1, out_depth: network_size});
-                layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
-                layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
-                layer_defs.push({type: 'regression', num_neurons: num_actions});
-
-                // options for the Temporal Difference learner that trains the above net
-                // by backpropping the temporal difference learning rule.
-                var tdtrainer_options = {learning_rate: 0.001, momentum: 0.0, batch_size: 64, l2_decay: 0.01};
-
-                var opt = {};
-                opt.temporal_window = temporal_window;
-                opt.experience_size = 30000;
-                opt.start_learn_threshold = 1000;
-                opt.gamma = 0.7;
-                opt.learning_steps_total = 200000;
-                opt.learning_steps_burnin = 3000;
-                opt.epsilon_min = 0.05;
-                opt.epsilon_test_time = 0.05;
-                opt.layer_defs = layer_defs;
-                opt.tdtrainer_options = tdtrainer_options;
-
-                brain = new deepqlearn.Brain(num_inputs, num_actions, opt); // woohoo
+            // *** Technique #5: Make a move without using the UI ***
+            var playerUnits = [];
+            for(var unitId in game.units) {
+                var unit = game.units[unitId];
+                if (unit.owner == 'player') {
+                    playerUnits.push(unit);
+                }
             }
+            console.log("Number of player Units: " + playerUnits.length);
 
-            // TODO Determine game state
+            // select random player
+            var selectedPlayerUnit = playerUnits[rand(0, playerUnits.length-1)];
+            // change direction or select direction for selected player
+            var newDirection = selectedPlayerUnit.active ? ((selectedPlayerUnit.direction + 1) % 4) : rand(0, 3);
 
-            // TODO If there is a previously saved game state
-            // TODO 1) Determine award for new game state compared to previously saved game state
-            // TODO 2) Apply reward to brain
-            // brain.backward(reward); // <-- learning magic happens here
+            console.log("Changing direction of player with unitId '" + selectedPlayerUnit.unitId + "' from " + selectedPlayerUnit.direction + " to " + newDirection);
 
-            // TODO Save game state
-
-            // TODO Calculate input for brain - 81 board states
-
-
-            // TODO Loop until valid action is chosen by brain
-            // TODO 1) Get proposed actions from brain using board states
-            // TODO 2) If invalid action, punish and goto step 1)
-            //var action = brain.forward(array_with_num_inputs_numbers);
+            // Move player
+            game.userActionMoveUnit(selectedPlayerUnit.unitId, newDirection);
 
 
-            // TODO Apply valid action to game
+            // *** Technique #6: Reinforced Learning ***
+            // *** Best Result within 50 iterations:
+            //// Initialize brain if necessary
+            //if (!brain) {
+            //    var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
+            //    var num_actions = 80; // a number in the range 0-79 : that is 4 possible actions for one of 20 possible players
+            //    var temporal_window = 1; // amount of temporal memory. 0 = agent lives in-the-moment :)
+            //    var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
+            //
+            //    // the value function network computes a value of taking any of the possible actions
+            //    // given an input state. Here we specify one explicitly the hard way
+            //    // but user could also equivalently instead use opt.hidden_layer_sizes = [20,20]
+            //    // to just insert simple relu hidden layers.
+            //    var layer_defs = [];
+            //    layer_defs.push({type: 'input', out_sx: 1, out_sy: 1, out_depth: network_size});
+            //    layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
+            //    layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
+            //    layer_defs.push({type: 'regression', num_neurons: num_actions});
+            //
+            //    // options for the Temporal Difference learner that trains the above net
+            //    // by backpropping the temporal difference learning rule.
+            //    var tdtrainer_options = {learning_rate: 0.001, momentum: 0.0, batch_size: 64, l2_decay: 0.01};
+            //
+            //    var opt = {};
+            //    opt.temporal_window = temporal_window;
+            //    opt.experience_size = 30000;
+            //    opt.start_learn_threshold = 1000;
+            //    opt.gamma = 0.7;
+            //    opt.learning_steps_total = 200000;
+            //    opt.learning_steps_burnin = 3000;
+            //    opt.epsilon_min = 0.05;
+            //    opt.epsilon_test_time = 0.05;
+            //    opt.layer_defs = layer_defs;
+            //    opt.tdtrainer_options = tdtrainer_options;
+            //
+            //    brain = new deepqlearn.Brain(num_inputs, num_actions, opt); // woohoo
+            //}
+            //
+            //// TODO Determine game state
+            //
+            //// TODO If there is a previously saved game state
+            //// TODO 1) Determine award for new game state compared to previously saved game state
+            //// TODO 2) Apply reward to brain
+            //// brain.backward(reward); // <-- learning magic happens here
+            //
+            //// TODO Save game state
+            //
+            //// TODO Calculate input for brain - 81 board states
+            //
+            //
+            //// TODO Loop until valid action is chosen by brain
+            //// TODO 1) Get proposed actions from brain using board states
+            //// TODO 2) If invalid action, punish and goto step 1)
+            ////var action = brain.forward(array_with_num_inputs_numbers);
+            //
+            //
+            //// TODO Apply valid action to game
+            //
+            //turn++;
 
-            turn++;
+
 
             setTimeout(autoPlay, 1000);
         } else {
