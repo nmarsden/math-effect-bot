@@ -148,6 +148,8 @@ TD.Game = function (situation) {
         }
         this.currentMap.drawMap();
         this.currentMap.draw(this.units);
+
+        this.ai.train();
     }
 
     this.getNewUnitId = function () {
@@ -280,9 +282,17 @@ TD.Game = function (situation) {
 
         // Spawn for bot
         this.spawnBotUnit();
-        this.currentMap.draw(this.units);
+
+        // Only draw if NOT training
+        if (!this.ai.isTraining) {
+            this.currentMap.draw(this.units);
+        }
+
         this.checkLoseConditions();
         this.statsTicksSurvived++;
+
+        // Train AI (if enabled)
+        this.ai.train();
     }
 
     this.duels = function () {

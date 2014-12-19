@@ -29,9 +29,11 @@ TD.AI = function (game) {
     ];
 
     this.isAutoPlay = false;
+    this.isTraining = false;
 
     this.startAutoPlay = function () {
         this.isAutoPlay = true;
+        this.isTraining = false;
         this.autoPlay();
     };
 
@@ -397,5 +399,79 @@ TD.AI = function (game) {
         }
     };
 
+    this.startTraining = function () {
+        this.isAutoPlay = false;
+        this.isTraining = true;
+        this.train();
+    };
 
+    this.stopTraining = function () {
+        this.isTraining = false;
+    };
+
+    this.train = function () {
+        if (!this.isTraining) {
+            return;
+        }
+
+        if (this.game.running) {
+
+            //console.log("training!!!!");
+
+            // *** Make a random move without using the UI ***
+            var playerUnits = [];
+            for (var unitId in game.units) {
+                var unit = game.units[unitId];
+                if (unit.owner == 'player') {
+                    playerUnits.push(unit);
+                }
+            }
+            //console.log("Number of player Units: " + playerUnits.length);
+
+            // select random player
+            var selectedPlayerUnit = playerUnits[rand(0, playerUnits.length - 1)];
+            // change direction or select direction for selected player
+            var newDirection = selectedPlayerUnit.active ? ((selectedPlayerUnit.direction + 1) % 4) : rand(0, 3);
+
+            //console.log("Changing direction of player with unitId '" + selectedPlayerUnit.unitId + "' from " + (selectedPlayerUnit.active ? selectedPlayerUnit.direction : 'inactive') + " to " + newDirection);
+
+            // Move player
+            this.game.userActionMoveUnit(selectedPlayerUnit.unitId, newDirection);
+
+        } else {
+            // -- Game over --
+            console.log("training iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "]");
+            //console.log("-----------------------------------------------------------------------------------------------------------------");
+
+            // Save iteration stats
+            this.iterationStats.push({turns: this.turn, kills: this.game.statsKilledUnits, points: this.game.statsPoints});
+
+            if (this.totalIterations == 50) {
+                // Output 50 iteration status
+                console.log("----------------------------------------");
+                console.log("*** Training Stats for 50 iterations ***");
+                console.log("----------------------------------------");
+                var statsOutput = "turns, kills, points\n";
+                for (var statNum = 0; statNum < this.iterationStats.length; statNum++) {
+                    statsOutput += this.iterationStats[statNum].turns + "," + this.iterationStats[statNum].kills + "," + this.iterationStats[statNum].points + "\n";
+                }
+                console.log(statsOutput);
+
+                // Reset iterations
+                this.totalIterations = 0;
+                this.iterationStats = [];
+            }
+
+            this.totalIterations++;
+
+            // -- Reset State --
+            this.turn = 0;
+
+            // Restart game
+            this.game.init();
+
+            //setTimeout(this.train.bind(this), 1000);
+        }
+
+    };
 };
