@@ -32,7 +32,7 @@ TD.Map = function (facet, config) {
 
         if (this.unitIds[unit.x] !== undefined) {
             if (this.unitIds[unit.x][unit.y] !== undefined) {
-                info ('We can`t put a unit to occupied cell (But this is ok some times =_=)');
+                //info ('We can`t put a unit to occupied cell (But this is ok some times =_=)');
             }
         } else {
             this.unitIds[unit.x] = {};

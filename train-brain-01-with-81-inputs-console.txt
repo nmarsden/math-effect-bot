@@ -1,0 +1,84 @@
+
+undefined
+td.ai.js:604 [Total Stats - Actions: 3272, Games: 400][Last 400 Games Stats - % Valid actions: 0.1904034229828851, Av. Kills: 0.5, Av. Points: 7.7, Av. Game Time (ms): 103.71524749999487, Games Per Sec: 578.5070319578899]
+td.ai.js:604 [Total Stats - Actions: 6617, Games: 800][Last 400 Games Stats - % Valid actions: 0.17847533632286997, Av. Kills: 0.56, Av. Points: 8.4225, Av. Game Time (ms): 140.07630000000063, Games Per Sec: 428.33798436994505]
+td.ai.js:604 [Total Stats - Actions: 9937, Games: 1200][Last 400 Games Stats - % Valid actions: 0.19759036144578312, Av. Kills: 0.505, Av. Points: 7.74, Av. Game Time (ms): 138.91862750000655, Games Per Sec: 431.90752082543554]
+td.ai.js:604 [Total Stats - Actions: 13369, Games: 1600][Last 400 Games Stats - % Valid actions: 0.21066433566433568, Av. Kills: 0.495, Av. Points: 7.9525, Av. Game Time (ms): 144.8826199999984, Games Per Sec: 414.128347485714]
+td.ai.js:604 [Total Stats - Actions: 16645, Games: 2000][Last 400 Games Stats - % Valid actions: 0.20177045177045178, Av. Kills: 0.475, Av. Points: 7.575, Av. Game Time (ms): 146.57566249999945, Games Per Sec: 409.34490062427807]
+td.ai.js:604 [Total Stats - Actions: 20164, Games: 2400][Last 400 Games Stats - % Valid actions: 0.24239840863881784, Av. Kills: 0.51, Av. Points: 8.185, Av. Game Time (ms): 158.59997999999905, Games Per Sec: 378.3102620820025]
+td.ai.js:604 [Total Stats - Actions: 23560, Games: 2800][Last 400 Games Stats - % Valid actions: 0.214075382803298, Av. Kills: 0.4975, Av. Points: 7.8875, Av. Game Time (ms): 155.25006750000117, Games Per Sec: 386.4732619198349]
+td.ai.js:604 [Total Stats - Actions: 27012, Games: 3200][Last 400 Games Stats - % Valid actions: 0.2291425260718424, Av. Kills: 0.4225, Av. Points: 7.08, Av. Game Time (ms): 158.79454000000814, Games Per Sec: 377.84674460467545]
+td.ai.js:604 [Total Stats - Actions: 30472, Games: 3600][Last 400 Games Stats - % Valid actions: 0.23872832369942196, Av. Kills: 0.4725, Av. Points: 7.6525, Av. Game Time (ms): 160.90458500000764, Games Per Sec: 372.89179795589513]
+td.ai.js:604 [Total Stats - Actions: 34008, Games: 4000][Last 400 Games Stats - % Valid actions: 0.25141402714932126, Av. Kills: 0.4825, Av. Points: 7.8575, Av. Game Time (ms): 165.05689999999973, Games Per Sec: 363.511007416231]
+td.ai.js:604 [Total Stats - Actions: 37615, Games: 4400][Last 400 Games Stats - % Valid actions: 0.27197116717493763, Av. Kills: 0.4625, Av. Points: 7.795, Av. Game Time (ms): 168.86163000000116, Games Per Sec: 355.3205070921061]
+td.ai.js:604 [Total Stats - Actions: 41239, Games: 4800][Last 400 Games Stats - % Valid actions: 0.26903973509933776, Av. Kills: 0.4225, Av. Points: 7.31, Av. Game Time (ms): 170.2545449999982, Games Per Sec: 352.41349944578945]
+td.ai.js:604 [Total Stats - Actions: 44895, Games: 5200][Last 400 Games Stats - % Valid actions: 0.27543763676148797, Av. Kills: 0.47, Av. Points: 7.7625, Av. Game Time (ms): 169.41327749999792, Games Per Sec: 354.16350409725555]
+td.ai.js:604 [Total Stats - Actions: 48649, Games: 5600][Last 400 Games Stats - % Valid actions: 0.2775705913692062, Av. Kills: 0.5125, Av. Points: 8.49, Av. Game Time (ms): 173.34964749999926, Games Per Sec: 346.1212691534331]
+td.ai.js:604 [Total Stats - Actions: 52290, Games: 6000][Last 400 Games Stats - % Valid actions: 0.27959351826421314, Av. Kills: 0.475, Av. Points: 7.9475, Av. Game Time (ms): 169.05223750000005, Games Per Sec: 354.9198809036762]
+td.ai.js:604 [Total Stats - Actions: 56092, Games: 6400][Last 400 Games Stats - % Valid actions: 0.3103629668595476, Av. Kills: 0.43, Av. Points: 7.6025, Av. Game Time (ms): 176.86157500000263, Games Per Sec: 339.2483641514507]
+td.ai.js:604 [Total Stats - Actions: 59928, Games: 6800][Last 400 Games Stats - % Valid actions: 0.31777893639207505, Av. Kills: 0.4475, Av. Points: 7.7925, Av. Game Time (ms): 179.11899749999984, Games Per Sec: 334.97284396089844]
+td.ai.js:604 [Total Stats - Actions: 63984, Games: 7200][Last 400 Games Stats - % Valid actions: 0.34566074950690334, Av. Kills: 0.4525, Av. Points: 7.7675, Av. Game Time (ms): 188.362397499996, Games Per Sec: 318.53491353018734]
+td.ai.js:604 [Total Stats - Actions: 68054, Games: 7600][Last 400 Games Stats - % Valid actions: 0.356019656019656, Av. Kills: 0.4825, Av. Points: 8.2925, Av. Game Time (ms): 189.81285750000097, Games Per Sec: 316.10082051475194]
+td.ai.js:604 [Total Stats - Actions: 72172, Games: 8000][Last 400 Games Stats - % Valid actions: 0.36328314715881493, Av. Kills: 0.42, Av. Points: 7.4275, Av. Game Time (ms): 192.54981749999396, Games Per Sec: 311.60767005142384]
+td.ai.js:604 [Total Stats - Actions: 76300, Games: 8400][Last 400 Games Stats - % Valid actions: 0.3682170542635659, Av. Kills: 0.435, Av. Points: 7.8175, Av. Game Time (ms): 193.67756249999744, Games Per Sec: 309.7932420540495]
+td.ai.js:604 [Total Stats - Actions: 80719, Games: 8800][Last 400 Games Stats - % Valid actions: 0.3937542430414121, Av. Kills: 0.47, Av. Points: 7.9575, Av. Game Time (ms): 207.5910424999986, Games Per Sec: 289.0298120642677]
+td.ai.js:604 [Total Stats - Actions: 85219, Games: 9200][Last 400 Games Stats - % Valid actions: 0.41955555555555557, Av. Kills: 0.44, Av. Points: 7.7725, Av. Game Time (ms): 210.5217224999977, Games Per Sec: 285.0062183012998]
+td.ai.js:604 [Total Stats - Actions: 89805, Games: 9600][Last 400 Games Stats - % Valid actions: 0.4282599215002181, Av. Kills: 0.395, Av. Points: 7.2925, Av. Game Time (ms): 211.63348749999363, Games Per Sec: 283.5090075241604]
+td.ai.js:604 [Total Stats - Actions: 94667, Games: 10000][Last 400 Games Stats - % Valid actions: 0.4611271081859317, Av. Kills: 0.425, Av. Points: 7.74, Av. Game Time (ms): 217.97019000000495, Games Per Sec: 275.26699866618753]
+td.ai.js:604 [Total Stats - Actions: 99709, Games: 10400][Last 400 Games Stats - % Valid actions: 0.49285997619992067, Av. Kills: 0.42, Av. Points: 7.63, Av. Game Time (ms): 227.91072750000282, Games Per Sec: 263.2609735318372]
+td.ai.js:604 [Total Stats - Actions: 104862, Games: 10800][Last 400 Games Stats - % Valid actions: 0.49039394527459734, Av. Kills: 0.3975, Av. Points: 7.525, Av. Game Time (ms): 232.63980000001553, Games Per Sec: 257.9094376800358]
+td.ai.js:604 [Total Stats - Actions: 110558, Games: 11200][Last 400 Games Stats - % Valid actions: 0.5300210674157303, Av. Kills: 0.4725, Av. Points: 8.1225, Av. Game Time (ms): 6983.211659999996, Games Per Sec: 8.592035143898249]
+td.ai.js:604 [Total Stats - Actions: 116554, Games: 11600][Last 400 Games Stats - % Valid actions: 0.5608739159439626, Av. Kills: 0.43, Av. Points: 7.8425, Av. Game Time (ms): 239.73062750001205, Games Per Sec: 250.28091164528814]
+td.ai.js:604 [Total Stats - Actions: 122999, Games: 12000][Last 400 Games Stats - % Valid actions: 0.6, Av. Kills: 0.3875, Av. Points: 7.5475, Av. Game Time (ms): 367.37796499999706, Games Per Sec: 163.31953931967715]
+td.ai.js:604 [Total Stats - Actions: 129926, Games: 12400][Last 400 Games Stats - % Valid actions: 0.6255233145661903, Av. Kills: 0.39, Av. Points: 7.63, Av. Game Time (ms): 263.254235000005, Games Per Sec: 227.9165613423042]
+game.ai.stopTraining()
+td.ai.js:425 -------------------------------------------------------------------------------------
+td.ai.js:426 Training Time (msecs) :5153988.316000002
+td.ai.js:427 -------------------------------------------------------------------------------------
+undefined
+        console.log("---------------------------------------");
+        console.log("*** Training Stats for 40,000 games ***");
+        console.log("---------------------------------------");
+        var statsOutput = "actions, games, valid_actions, av_kills, av_points, av_game_time, games_per_sec\n";
+        for (var statNum = 0; statNum < game.ai.iterationStats.length; statNum++) {
+            var stat = game.ai.iterationStats[statNum];
+            statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerSec + "\n";
+        }
+        console.log(statsOutput);
+
+VM1241:2 ---------------------------------------
+VM1241:3 *** Training Stats for 40,000 games ***
+VM1241:4 ---------------------------------------
+VM1241:10 actions, games, valid_actions, av_kills, av_points, av_game_time, games_per_sec
+3272,400,0.1904034229828851,0.5,7.7,103.71524749999487,578.5070319578899
+6617,800,0.17847533632286997,0.56,8.4225,140.07630000000063,428.33798436994505
+9937,1200,0.19759036144578312,0.505,7.74,138.91862750000655,431.90752082543554
+13369,1600,0.21066433566433568,0.495,7.9525,144.8826199999984,414.128347485714
+16645,2000,0.20177045177045178,0.475,7.575,146.57566249999945,409.34490062427807
+20164,2400,0.24239840863881784,0.51,8.185,158.59997999999905,378.3102620820025
+23560,2800,0.214075382803298,0.4975,7.8875,155.25006750000117,386.4732619198349
+27012,3200,0.2291425260718424,0.4225,7.08,158.79454000000814,377.84674460467545
+30472,3600,0.23872832369942196,0.4725,7.6525,160.90458500000764,372.89179795589513
+34008,4000,0.25141402714932126,0.4825,7.8575,165.05689999999973,363.511007416231
+37615,4400,0.27197116717493763,0.4625,7.795,168.86163000000116,355.3205070921061
+41239,4800,0.26903973509933776,0.4225,7.31,170.2545449999982,352.41349944578945
+44895,5200,0.27543763676148797,0.47,7.7625,169.41327749999792,354.16350409725555
+48649,5600,0.2775705913692062,0.5125,8.49,173.34964749999926,346.1212691534331
+52290,6000,0.27959351826421314,0.475,7.9475,169.05223750000005,354.9198809036762
+56092,6400,0.3103629668595476,0.43,7.6025,176.86157500000263,339.2483641514507
+59928,6800,0.31777893639207505,0.4475,7.7925,179.11899749999984,334.97284396089844
+63984,7200,0.34566074950690334,0.4525,7.7675,188.362397499996,318.53491353018734
+68054,7600,0.356019656019656,0.4825,8.2925,189.81285750000097,316.10082051475194
+72172,8000,0.36328314715881493,0.42,7.4275,192.54981749999396,311.60767005142384
+76300,8400,0.3682170542635659,0.435,7.8175,193.67756249999744,309.7932420540495
+80719,8800,0.3937542430414121,0.47,7.9575,207.5910424999986,289.0298120642677
+85219,9200,0.41955555555555557,0.44,7.7725,210.5217224999977,285.0062183012998
+89805,9600,0.4282599215002181,0.395,7.2925,211.63348749999363,283.5090075241604
+94667,10000,0.4611271081859317,0.425,7.74,217.97019000000495,275.26699866618753
+99709,10400,0.49285997619992067,0.42,7.63,227.91072750000282,263.2609735318372
+104862,10800,0.49039394527459734,0.3975,7.525,232.63980000001553,257.9094376800358
+110558,11200,0.5300210674157303,0.4725,8.1225,6983.211659999996,8.592035143898249
+116554,11600,0.5608739159439626,0.43,7.8425,239.73062750001205,250.28091164528814
+122999,12000,0.6,0.3875,7.5475,367.37796499999706,163.31953931967715
+129926,12400,0.6255233145661903,0.39,7.63,263.254235000005,227.9165613423042
+

@@ -10,6 +10,14 @@ TD.AI = function (game) {
     this.trackedEnemies = [];
 
     this.brain = null;
+    this.previousKilledUnits;
+    this.totalInvalidActions = 0;
+    this.totalValidActions = 0;
+    this.totalGamesPlayed = 0;
+    this.totalKills = 0;
+    this.totalPoints = 0;
+    this.totalRewards = 0;
+    this.totalActions = 0;
 
     // -- Constants --
     this.directions = ["up", "right", "down", "left"];
@@ -402,11 +410,25 @@ TD.AI = function (game) {
     this.startTraining = function () {
         this.isAutoPlay = false;
         this.isTraining = true;
+        window.performance.mark('mark_start_training');
+        window.performance.mark('mark_start_training_window');
         this.train();
     };
 
     this.stopTraining = function () {
         this.isTraining = false;
+        window.performance.mark('mark_stop_training');
+        window.performance.measure('measure_training_time', 'mark_start_training', 'mark_stop_training');
+
+        var trainingTime = window.performance.getEntriesByName('measure_training_time')[0].duration;
+
+        console.log("-------------------------------------------------------------------------------------");
+        console.log("Training Time (msecs) :" + trainingTime);
+        console.log("-------------------------------------------------------------------------------------");
+
+        window.performance.clearMarks('mark_start_training');
+        window.performance.clearMarks('mark_stop_training');
+        window.performance.clearMeasures('measure_training_time');
     };
 
     this.train = function () {
@@ -418,59 +440,203 @@ TD.AI = function (game) {
 
             //console.log("training!!!!");
 
-            // *** Make a random move without using the UI ***
-            var playerUnits = [];
-            for (var unitId in game.units) {
-                var unit = game.units[unitId];
-                if (unit.owner == 'player') {
-                    playerUnits.push(unit);
+            // *** Technique #1: Random Move ***
+            //var playerUnits = [];
+            //for (var unitId in game.units) {
+            //    var unit = game.units[unitId];
+            //    if (unit.owner == 'player') {
+            //        playerUnits.push(unit);
+            //    }
+            //}
+            //var numInvalidMoves = 0;
+            //do {
+            //    // select random player
+            //    var selectedPlayerUnit = playerUnits[rand(0, playerUnits.length - 1)];
+            //
+            //    // change direction or select direction for selected player
+            //    var newDirection = selectedPlayerUnit.active ? ((selectedPlayerUnit.direction + 1) % 4) : rand(0, 3);
+            //
+            //    if (numInvalidMoves > 0) {
+            //        console.log("[Invalid Move #" + numInvalidMoves + "]:");
+            //    }
+            //
+            //    numInvalidMoves++;
+            //
+            //} while(!this.isValidMove(selectedPlayerUnit, newDirection));
+
+
+            // *** Technique #2: Reinforced Learning ***
+            // Initialize brain if necessary
+            if (!this.brain) {
+                var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
+                var num_actions = 20; // a number in the range 0-19 : that is 4 possible actions for one of 5 possible players
+                var temporal_window = 1; // amount of temporal memory. 0 = agent lives in-the-moment :)
+                var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
+
+                // the value function network computes a value of taking any of the possible actions
+                // given an input state. Here we specify one explicitly the hard way
+                // but user could also equivalently instead use opt.hidden_layer_sizes = [20,20]
+                // to just insert simple relu hidden layers.
+                var layer_defs = [];
+                layer_defs.push({type: 'input', out_sx: 1, out_sy: 1, out_depth: network_size});
+                layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
+                layer_defs.push({type: 'fc', num_neurons: 50, activation: 'relu'});
+                layer_defs.push({type: 'regression', num_neurons: num_actions});
+
+                // options for the Temporal Difference learner that trains the above net
+                // by backpropping the temporal difference learning rule.
+                var tdtrainer_options = {learning_rate: 0.001, momentum: 0.0, batch_size: 64, l2_decay: 0.01};
+
+                var opt = {};
+                opt.temporal_window = temporal_window;
+                opt.experience_size = 30000;
+                opt.start_learn_threshold = 1000;
+                opt.gamma = 0.7;
+                opt.learning_steps_total = 200000;
+                opt.learning_steps_burnin = 3000;
+                opt.epsilon_min = 0.05;
+                opt.epsilon_test_time = 0.05;
+                opt.layer_defs = layer_defs;
+                opt.tdtrainer_options = tdtrainer_options;
+
+                this.brain = new deepqlearn.Brain(num_inputs, num_actions, opt); // woohoo
+
+                console.log("*******************************************************");
+                console.log("  Brain configuration");
+                console.log("  -------------------");
+                console.log("  Number of Inputs:  " + num_inputs);
+                console.log("  Number of Actions: " + num_actions);
+                console.log("*******************************************************");
+            }
+
+            // Determine boardState and playerUnits
+            //game.units
+            //game.currentMap.unitIds
+            //game.currentMap.bonuses
+            var boardX, boardY, unit, boardStates = [], playerUnits = [];
+            for (boardY = 0; boardY < 9; boardY++) {
+                for (boardX = 0; boardX < 9; boardX++) {
+                    unit = this.getUnitAtBoardPosition(boardX, boardY);
+                    if (unit) {
+                        if (unit.owner == 'player') {
+                            playerUnits.push(unit);
+                        }
+                        boardStates.push(this.getInputStateForUnit(unit));
+                    } else {
+                        boardStates.push(0); // empty
+                    }
                 }
             }
-            //console.log("Number of player Units: " + playerUnits.length);
 
+            if (this.turn > 0) {
+                // Reward brain for killing the enemy
+                var reward;
+                if (this.game.statsKilledUnits > this.previousKilledUnits) {
+                    reward = +5;
+                } else {
+                    reward = +1;
+                }
+                this.rewardBrain(reward);
+            }
+            this.previousKilledUnits = this.game.statsKilledUnits;
+
+            // Loop until valid action is chosen by brain
             var numInvalidMoves = 0;
             do {
-                // select random player
-                var selectedPlayerUnit = playerUnits[rand(0, playerUnits.length - 1)];
+                if (numInvalidMoves > 0) {
+                    // punish brain for invalid action
+                    this.rewardBrain(-6);
+                }
+                // Get proposed action from brain using board states
+                var action = this.brain.forward(boardStates);
 
-                // change direction or select direction for selected player
-                var newDirection = selectedPlayerUnit.active ? ((selectedPlayerUnit.direction + 1) % 4) : rand(0, 3);
+                // Convert action to selectPlayerUnit and newDirection
+                var playerIndex = Math.floor(action / 4);
+                var selectedPlayerUnit = (playerIndex < playerUnits.length) ? playerUnits[playerIndex] : null;
+                var newDirection = action - (4 * playerIndex);
 
                 if (numInvalidMoves > 0) {
-                    console.log("[Invalid Move #" + numInvalidMoves + "]:");
-                }
+                    this.totalInvalidActions++;
 
+                    //console.log("[Invalid Move #" + numInvalidMoves + "]:");
+                }
                 numInvalidMoves++;
 
             } while(!this.isValidMove(selectedPlayerUnit, newDirection));
 
-
-            //console.log("Changing direction of player with unitId '" + selectedPlayerUnit.unitId + "' from " + (selectedPlayerUnit.active ? selectedPlayerUnit.direction : 'inactive') + " to " + newDirection);
-
             // Move player
+            //console.log("Changing direction of player with unitId '" + selectedPlayerUnit.unitId + "' from " + (selectedPlayerUnit.active ? selectedPlayerUnit.direction : 'inactive') + " to " + newDirection);
             this.game.userActionMoveUnit(selectedPlayerUnit.unitId, newDirection);
+
+            this.totalValidActions++;
+
+            this.turn++;
 
         } else {
             // -- Game over --
-            console.log("training iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "]");
+
+            this.totalGamesPlayed++;
+            this.totalKills += this.game.statsKilledUnits;
+            this.totalPoints += this.game.statsPoints;
+
+            // Punish brain for letting the enemy capture the base
+            this.rewardBrain(-6);
+
+            //console.log("training iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "]");
             //console.log("-----------------------------------------------------------------------------------------------------------------");
 
             // Save iteration stats
-            this.iterationStats.push({turns: this.turn, kills: this.game.statsKilledUnits, points: this.game.statsPoints});
+            //this.iterationStats.push({turns: this.turn, kills: this.game.statsKilledUnits, points: this.game.statsPoints});
 
-            if (this.totalIterations == 50) {
+
+            if (this.totalGamesPlayed % 400 === 0) {
+                // Calculate Stats
+                var totalActionsForWindow = (this.totalInvalidActions + this.totalValidActions);
+                var percentValidActions = this.totalInvalidActions / totalActionsForWindow;
+                var averageKills = this.totalKills / this.totalIterations;
+                var averagePoints = this.totalPoints / this.totalIterations;
+                var averageReward = this.totalRewards / totalActionsForWindow;
+                window.performance.mark('mark_stop_training_window');
+                window.performance.measure('measure_training_time_window', 'mark_start_training_window', 'mark_stop_training_window');
+                var trainingTimeWindow = window.performance.getEntriesByName('measure_training_time_window')[0].duration;
+                var averageGameTime = trainingTimeWindow / this.totalIterations;
+                var gamesPerSec = 60000 / averageGameTime;
+
+                this.totalActions += totalActionsForWindow;
+
+                // Save stats
+                this.iterationStats.push({actions: this.totalActions, gamesPlayed: this.totalGamesPlayed, percentValidActions: percentValidActions, averageReward: averageReward, averageKills: averageKills, averagePoints: averagePoints, averageGameTime: averageGameTime, gamesPerSec: gamesPerSec});
+
+                // Output Stats
+                console.log("[Total Stats - Actions: " + this.totalActions + ", Games: " + this.totalGamesPlayed + "][Last 400 Games Stats - % Valid actions: " + percentValidActions + ", Av. Reward: " + averageReward + ", Av. Kills: " + averageKills + ", Av. Points: " + averagePoints + ", Av. Game Time (ms): " + averageGameTime + ", Games Per Sec: " + gamesPerSec + "]");
+
+                this.totalIterations = 0;
+                this.totalInvalidActions = 0;
+                this.totalValidActions = 0;
+                this.totalKills = 0;
+                this.totalPoints = 0;
+                this.totalRewards = 0;
+
+                window.performance.clearMarks('mark_start_training_window');
+                window.performance.clearMarks('mark_stop_training_window');
+                window.performance.clearMeasures('measure_training_time_window');
+
+                window.performance.mark('mark_start_training_window');
+            }
+
+            if (this.iterationStats.length == 100) {
                 // Output 50 iteration status
-                console.log("----------------------------------------");
-                console.log("*** Training Stats for 50 iterations ***");
-                console.log("----------------------------------------");
-                var statsOutput = "turns, kills, points\n";
+                console.log("---------------------------------------");
+                console.log("*** Training Stats for 40,000 games ***");
+                console.log("---------------------------------------");
+                var statsOutput = "actions, games, valid_actions, av_reward, av_kills, av_points, av_game_time, games_per_sec\n";
                 for (var statNum = 0; statNum < this.iterationStats.length; statNum++) {
-                    statsOutput += this.iterationStats[statNum].turns + "," + this.iterationStats[statNum].kills + "," + this.iterationStats[statNum].points + "\n";
+                    var stat = this.iterationStats[statNum];
+                    statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageReward + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerSec + "\n";
                 }
                 console.log(statsOutput);
 
-                // Reset iterations
-                this.totalIterations = 0;
+                // Reset iterationStats
                 this.iterationStats = [];
             }
 
@@ -488,7 +654,39 @@ TD.AI = function (game) {
 
     };
 
+    this.getUnitAtBoardPosition = function(boardX, boardY) {
+        if (this.game.currentMap.unitIds[boardX] !== undefined) {
+            var unitId = this.game.currentMap.unitIds[boardX][boardY];
+            if (unitId) {
+                return this.game.units[unitId];
+            }
+        }
+        return;
+    };
+
+    this.getInputStateForUnit = function(unit) {
+        if (unit.owner == 'player') {
+            // player unit state values are in the range 1-5
+            if (!unit.active) {
+                return 1;
+            } else {
+                return unit.direction + 1;
+            }
+        } else {
+            // enemy unit state values are in the range 6-9
+            return unit.direction + 6;
+        }
+    };
+
+    this.rewardBrain = function(reward) {
+        this.brain.backward(reward);
+        this.totalRewards += reward;
+    };
+
     this.isValidMove = function (playerUnit, newDirection) {
+        if (!playerUnit) {
+            return false;
+        }
         if (playerUnit.active && playerUnit.direction == newDirection) {
             return false; // invalid - already moving that direction
         } else {

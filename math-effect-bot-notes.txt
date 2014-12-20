@@ -76,9 +76,9 @@ Questions
   a) 81 (9 x 9) inputs for board state with values...
      - 0 = empty square
      - 1-5 = player state (1=player not moving, 2=player moving up, 3=player moving right, 4=player moving down, 5=player moving left)
-     - 6-10 = enemy state (0=enemy with moving direction unknown, 1=enemy moving up, 2=enemy moving right, 3=enemy moving down, 4=enemy moving left)
-     - 11 = increase power square
-     - 12 = decrease power square
+     - 6-9 = enemy state (1=enemy moving up, 2=enemy moving right, 3=enemy moving down, 4=enemy moving left)
+     - 10 = increase power square
+     - 11 = decrease power square
 
      where board states are ordered from left to right, top to bottom on the board
 
