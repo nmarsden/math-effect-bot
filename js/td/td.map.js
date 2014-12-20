@@ -194,7 +194,7 @@ TD.Map = function (facet, config) {
     }
 
     this.botUnitDirectionSetup = function(unit) {
-        possibleDirections = [];
+        var possibleDirections = [];
         if (unit.x == 0) {
             possibleDirections.push(1);
         } else if (unit.x == this.size - 1) {

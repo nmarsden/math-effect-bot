@@ -428,10 +428,22 @@ TD.AI = function (game) {
             }
             //console.log("Number of player Units: " + playerUnits.length);
 
-            // select random player
-            var selectedPlayerUnit = playerUnits[rand(0, playerUnits.length - 1)];
-            // change direction or select direction for selected player
-            var newDirection = selectedPlayerUnit.active ? ((selectedPlayerUnit.direction + 1) % 4) : rand(0, 3);
+            var numInvalidMoves = 0;
+            do {
+                // select random player
+                var selectedPlayerUnit = playerUnits[rand(0, playerUnits.length - 1)];
+
+                // change direction or select direction for selected player
+                var newDirection = selectedPlayerUnit.active ? ((selectedPlayerUnit.direction + 1) % 4) : rand(0, 3);
+
+                if (numInvalidMoves > 0) {
+                    console.log("[Invalid Move #" + numInvalidMoves + "]:");
+                }
+
+                numInvalidMoves++;
+
+            } while(!this.isValidMove(selectedPlayerUnit, newDirection));
+
 
             //console.log("Changing direction of player with unitId '" + selectedPlayerUnit.unitId + "' from " + (selectedPlayerUnit.active ? selectedPlayerUnit.direction : 'inactive') + " to " + newDirection);
 
@@ -467,9 +479,26 @@ TD.AI = function (game) {
             // -- Reset State --
             this.turn = 0;
 
-            // Restart game
+            // Restart game & continue training
             this.game.init();
+            // Note: Using setTimeout instead of calling train() directly to avoid a recursive call
+            // which would over time cause a 'maximum stack size exceeded' error
+            setTimeout(this.train.bind(this), 10);
         }
 
+    };
+
+    this.isValidMove = function (playerUnit, newDirection) {
+        if (playerUnit.active && playerUnit.direction == newDirection) {
+            return false; // invalid - already moving that direction
+        } else {
+            // Check if moving player out of board boundaries
+            switch (newDirection) {
+                case 0: return (playerUnit.y - 1) >= 0;
+                case 1: return (playerUnit.x + 1) <= 9;
+                case 2: return (playerUnit.y + 1) <= 9;
+                case 3: return (playerUnit.x - 1) >= 0;
+            }
+        }
     };
 };

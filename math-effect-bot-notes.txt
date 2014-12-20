@@ -284,6 +284,13 @@ game 8: 356
 game 9: 1446  <-- Top Score!
 
 
+----------------------
+*** Bot Name Ideas ***
+----------------------
+HIMEA - Highly Intelligent Math Effect Automation
+MEA - Math Effect Automation
+
+
 ---------------------------
 *** Presentation Script ***
 ---------------------------
@@ -336,3 +343,15 @@ Conclusion
 - if 'Human' wins - don't worry, AI will not defeat the human race! ;-)
 
 
+--------------------------------
+*** Other Presentation Ideas ***
+--------------------------------
+
+Hymie YouTube videos
+- Hymie Out Of Control (first 30 secs): https://www.youtube.com/watch?v=7eR2CMgRmnM
+- Hymie As New Guy (49 secs): https://www.youtube.com/watch?v=5rXHvb8gQUU
+
+Narrated
+- Using a computer generated voice and subtitles
+- image of speaker in the bottom-left corner, eg. HAL or brain
+- Could upload the video to YouTube to apply subtitles

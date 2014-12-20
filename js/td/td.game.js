@@ -152,8 +152,6 @@ TD.Game = function (situation) {
             this.currentMap.drawMap();
             this.currentMap.draw(this.units);
         }
-
-        this.ai.train();
     }
 
     this.getNewUnitId = function () {
