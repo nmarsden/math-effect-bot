@@ -5,6 +5,7 @@ TD.AI = function (game) {
     this.turn = 0;
     this.totalIterations = 1;
     this.iterationStats = [];
+    this.bestGame = {turns: 0, kills: 0, points: 0};
     this.previousSelectedDirection = -1;
     this.checkForSpawnedEnemy = true;
     this.trackedEnemies = [];
@@ -331,9 +332,12 @@ TD.AI = function (game) {
             setTimeout(this.autoPlay.bind(this), 1000);
 
         } else {
+            if (this.game.statsPoints > this.bestGame.points) {
+                this.bestGame = {turns: this.turn, kills: this.game.statsKilledUnits, points: this.game.statsPoints};
+            }
+
             // -- Game over --
-            console.log("iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "]");
-            console.log("-----------------------------------------------------------------------------------------------------------------");
+            console.log("iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "][ *** best Game - turns: " + this.bestGame.turns + ", kills: " + this.bestGame.kills + ", points: " + this.bestGame.points + " ***]");
 
             // Save iteration stats
             this.iterationStats.push({turns: this.turn, kills: this.game.statsKilledUnits, points: this.game.statsPoints});
@@ -352,6 +356,8 @@ TD.AI = function (game) {
                 // Reset iterations
                 this.totalIterations = 0;
                 this.iterationStats = [];
+
+                console.log("[ *** best Game - turns: " + this.bestGame.turns + ", kills: " + this.bestGame.kills + ", points: " + this.bestGame.points + " ***]");
             }
 
             this.totalIterations++;
@@ -396,6 +402,8 @@ TD.AI = function (game) {
             statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageReward + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerMin + "\n";
         }
         console.log(statsOutput);
+        console.log("-------------------------------------------------------------------------------------");
+        console.log("[Best Game#" + this.bestGame.game + " - turns:" + this.bestGame.turns + ", kills:" + this.bestGame.kills + ", points:" + this.bestGame.points + "]");
         console.log("-------------------------------------------------------------------------------------");
         console.log("Training Time (msecs) :" + trainingTime);
         console.log("-------------------------------------------------------------------------------------");
@@ -458,6 +466,10 @@ TD.AI = function (game) {
         } else {
             // -- Game over --
 
+            if (this.game.statsPoints > this.bestGame.points) {
+                this.bestGame = {game: this.totalGamesPlayed, turns: this.turn, kills: this.game.statsKilledUnits, points: this.game.statsPoints};
+            }
+
             this.totalGamesPlayed++;
             this.totalKills += this.game.statsKilledUnits;
             this.totalPoints += this.game.statsPoints;
@@ -491,7 +503,10 @@ TD.AI = function (game) {
                 this.iterationStats.push({actions: this.totalActions, gamesPlayed: this.totalGamesPlayed, percentValidActions: percentValidActions, averageReward: averageReward, averageKills: averageKills, averagePoints: averagePoints, averageGameTime: averageGameTime, gamesPerMin: gamesPerMin});
 
                 // Output Stats
-                console.log("[Total Stats - Actions: " + this.totalActions + ", Games: " + this.totalGamesPlayed + "][Last 400 Games Stats - % Valid actions: " + percentValidActions + ", Av. Reward: " + averageReward + ", Av. Kills: " + averageKills + ", Av. Points: " + averagePoints + ", Av. Game Time (ms): " + averageGameTime + ", Games Per Min: " + gamesPerMin + "]");
+                console.log(
+                    "[Totals - A:" + this.totalActions + ",G:" + this.totalGamesPlayed + "]" +
+                    "[Best Game#" + this.bestGame.game + " - turns:" + this.bestGame.turns + ", kills:" + this.bestGame.kills + ", points:" + this.bestGame.points + "]" +
+                    "[Last 400 Games - %VA:" + percentValidActions + ", Av.R:" + averageReward + ", Av.K:" + averageKills + ", Av.P:" + averagePoints + ", Av.GT:" + averageGameTime + ", GPM:" + gamesPerMin + "]");
 
                 this.totalIterations = 0;
                 this.totalInvalidActions = 0;
@@ -518,6 +533,8 @@ TD.AI = function (game) {
                     statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageReward + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerMin + "\n";
                 }
                 console.log(statsOutput);
+
+                console.log("[Best Game#" + this.bestGame.game + " - turns:" + this.bestGame.turns + ", kills:" + this.bestGame.kills + ", points:" + this.bestGame.points + "]");
 
                 // Reset iterationStats
                 this.iterationStats = [];
