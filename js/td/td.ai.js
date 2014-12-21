@@ -10,7 +10,9 @@ TD.AI = function (game) {
     this.trackedEnemies = [];
 
     this.brain = null;
-    this.previousKilledUnits;
+    this.previousKilledUnits = 0;
+    this.previousPlayerUnits = 0;
+    this.previousOutsideBaseZone = 0;
     this.totalInvalidActions = 0;
     this.totalValidActions = 0;
     this.totalGamesPlayed = 0;
@@ -345,6 +347,9 @@ TD.AI = function (game) {
 
             // -- Reset State --
             this.turn = 0;
+            this.previousKilledUnits = 0;
+            this.previousPlayerUnits = 0;
+            this.previousOutsideBaseZone = 0;
             this.previousSelectedDirection = -1;
             this.checkForSpawnedEnemy = true;
             this.trackedEnemies = [];
@@ -387,6 +392,15 @@ TD.AI = function (game) {
         window.performance.clearMarks('mark_start_training');
         window.performance.clearMarks('mark_stop_training');
         window.performance.clearMeasures('measure_training_time');
+    };
+
+    this.saveBrain = function() {
+        if (this.brain) {
+            console.log("--- Saving brain ---");
+            console.log(JSON.stringify(this.brain.value_net.toJSON()));
+        } else {
+            console.log("--- No brain to save ---");
+        }
     };
 
     this.train = function () {
@@ -502,6 +516,9 @@ TD.AI = function (game) {
 
             // -- Reset State --
             this.turn = 0;
+            this.previousKilledUnits = 0;
+            this.previousPlayerUnits = 0;
+            this.previousOutsideBaseZone = 0;
 
             // Restart game & continue training
             this.game.init();
@@ -557,7 +574,7 @@ TD.AI = function (game) {
 
     this.movePlayerUsingBrain = function() {
         // Determine boardState and playerUnits
-        var boardX, boardY, unit, boardStates = [], playerUnits = [], brainInputs;
+        var boardX, boardY, unit, boardStates = [], playerUnits = [], brainInputs, outsideBaseZone;
         for (boardY = 0; boardY < 9; boardY++) {
             for (boardX = 0; boardX < 9; boardX++) {
                 unit = this.getUnitAtBoardPosition(boardX, boardY);
@@ -574,15 +591,34 @@ TD.AI = function (game) {
 
         if (this.turn > 0) {
             // Reward brain for killing the enemy
-            var reward;
+            var reward = 0;
             if (this.game.statsKilledUnits > this.previousKilledUnits) {
-                reward = +5;
+                reward += 5;
             } else {
-                reward = +1;
+                reward += 1;
+            }
+            // Punish for spawning a unit if it results in more than 3 player units
+            if (playerUnits.length > this.previousPlayerUnits && playerUnits.length > 3) {
+                reward -= 6;
+            }
+            // Reward for reducing player units when previously there were more than 3 player units
+            if (playerUnits.length < this.previousPlayerUnits && this.previousPlayerUnits > 3) {
+                reward += 5;
+            }
+            // Punish for player moving out of the 'base zone'
+            outsideBaseZone = playerUnits.length - this.numberOfPlayerUnitsInBaseZone(playerUnits);
+            if (outsideBaseZone > this.previousOutsideBaseZone) {
+                reward -= 6;
+            }
+            // Reward for player moving into the 'base zone'
+            if (outsideBaseZone < this.previousOutsideBaseZone) {
+                reward += 5;
             }
             this.rewardBrain(reward);
         }
         this.previousKilledUnits = this.game.statsKilledUnits;
+        this.previousPlayerUnits = playerUnits.length;
+        this.previousOutsideBaseZone = outsideBaseZone;
 
         // Calculate brainInputs from boardStates
         //brainInputs = this.populateBrainInputs(boardStates);
@@ -656,6 +692,19 @@ TD.AI = function (game) {
         }
     };
 
+    this.numberOfPlayerUnitsInBaseZone = function(playerUnits) {
+        // The 'Base Zone' is within 2 squares of the base
+        var inBaseZone = 0;
+        for (var i=0; i<playerUnits.length; i++) {
+            var playerX = playerUnits[i].x;
+            var playerY = playerUnits[i].y;
+            if (playerX > 1 && playerX < 7 && playerY > 1 && playerY < 7) {
+                inBaseZone++;
+            }
+        }
+        return inBaseZone;
+    };
+
     this.rewardBrain = function(reward) {
         this.brain.backward(reward);
         this.totalRewards += reward;
@@ -692,4 +741,5 @@ TD.AI = function (game) {
             }
         }
     };
+
 };

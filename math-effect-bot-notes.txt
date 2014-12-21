@@ -407,3 +407,35 @@ Training Runs:     165,904
 av. rewards:       Decreasing
 av. points:        Stable at 6
 
+
+--------------
+Train Brain 03
+--------------
+Summary:           Added more rewards/punishments.
+                   Punish spawning more than 3 player units & reward when player units reduces to 3
+                   Introduced the concept of the 'base zone' to encourage player units to stay near the base.
+
+Number of Inputs:  81
+Number of Actions: 12  (represents 3 player units)
+Rewards:
+    +5: Killed an enemy
+    +5: Reduced number of player units when more than three player units
+    +5: Moved player unit inside the 'base zone'
+    +1: Regular move
+    -6: Invalid move
+            - moved player that does not exist
+            - moved player in direction they are already moving
+            - moved player off the board
+    -6: Let enemy capture the base
+    -6: Spawned a unit resulting in more than three player units
+    -6: Moved player unit outside the 'base zone'
+
+Console Output:    train-brain-03-with-81-inputs-console.txt
+Stats Output:      train-brain-03-with-81-inputs-stats.csv
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:
