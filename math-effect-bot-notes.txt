@@ -408,12 +408,13 @@ av. rewards:       Decreasing
 av. points:        Stable at 6
 
 
---------------
-Train Brain 03
---------------
+------------------------------
+Train Brain 03 a) Unoptimized
+------------------------------
 Summary:           Added more rewards/punishments.
                    Punish spawning more than 3 player units & reward when player units reduces to 3
                    Introduced the concept of the 'base zone' to encourage player units to stay near the base.
+                   ** VERY SLOW **
 
 Number of Inputs:  81
 Number of Actions: 12  (represents 3 player units)
@@ -432,6 +433,19 @@ Rewards:
 
 Console Output:    train-brain-03-with-81-inputs-console.txt
 Stats Output:      train-brain-03-with-81-inputs-stats.csv
+
+Overall:            Too Slow!
+Training Time:      13.5 hours (48833427 ms)
+Training Runs:      230,710
+% valid actions:    40%
+av. rewards:        1.5
+av. points:         19
+
+
+------------------------------
+Train Brain 03 b) Optimized
+------------------------------
+Summary:           Same as a) but with an optimization of the check for within the 'base zone', using a lookup table
 
 Overall:
 Training Time:

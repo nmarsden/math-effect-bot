@@ -37,6 +37,17 @@ TD.AI = function (game) {
         [0, null, null, null, null, null, null, null, 2],     // x = 7
         [null, 1, 1, 0, 1, 2, 1, 1, null]   // x = 8
     ];
+    this.baseZone = [
+        [false, false, false, false, false, false, false, false, false],  // x = 0
+        [false, false, false, false, false, false, false, false, false],  // x = 1
+        [false, false, true,  true,  true,  true,  true,  false, false],  // x = 2
+        [false, false, true,  true,  true,  true,  true,  false, false],  // x = 3
+        [false, false, true,  true,  true,  true,  true,  false, false],  // x = 4
+        [false, false, true,  true,  true,  true,  true,  false, false],  // x = 5
+        [false, false, true,  true,  true,  true,  true,  false, false],  // x = 6
+        [false, false, false, false, false, false, false, false, false],  // x = 7
+        [false, false, false, false, false, false, false, false, false]   // x = 8
+    ];
 
     this.isAutoPlay = false;
     this.isTraining = false;
@@ -574,13 +585,16 @@ TD.AI = function (game) {
 
     this.movePlayerUsingBrain = function() {
         // Determine boardState and playerUnits
-        var boardX, boardY, unit, boardStates = [], playerUnits = [], brainInputs, outsideBaseZone;
+        var boardX, boardY, unit, boardStates = [], playerUnits = [], brainInputs, outsideBaseZone=0;
         for (boardY = 0; boardY < 9; boardY++) {
             for (boardX = 0; boardX < 9; boardX++) {
                 unit = this.getUnitAtBoardPosition(boardX, boardY);
                 if (unit) {
                     if (unit.owner == 'player') {
                         playerUnits.push(unit);
+                        if (!this.baseZone[boardX][boardY]) {
+                            outsideBaseZone++;
+                        }
                     }
                     boardStates.push(this.getInputStateForUnit(unit));
                 } else {
@@ -606,7 +620,6 @@ TD.AI = function (game) {
                 reward += 5;
             }
             // Punish for player moving out of the 'base zone'
-            outsideBaseZone = playerUnits.length - this.numberOfPlayerUnitsInBaseZone(playerUnits);
             if (outsideBaseZone > this.previousOutsideBaseZone) {
                 reward -= 6;
             }
@@ -690,19 +703,6 @@ TD.AI = function (game) {
             // enemy unit state values are in the range 6-9
             return unit.direction + 6;
         }
-    };
-
-    this.numberOfPlayerUnitsInBaseZone = function(playerUnits) {
-        // The 'Base Zone' is within 2 squares of the base
-        var inBaseZone = 0;
-        for (var i=0; i<playerUnits.length; i++) {
-            var playerX = playerUnits[i].x;
-            var playerY = playerUnits[i].y;
-            if (playerX > 1 && playerX < 7 && playerY > 1 && playerY < 7) {
-                inBaseZone++;
-            }
-        }
-        return inBaseZone;
     };
 
     this.rewardBrain = function(reward) {
