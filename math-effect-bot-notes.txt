@@ -364,10 +364,22 @@ Narrated
 --------------
 Train Brain 01
 --------------
-Summary:           Brain does not appear to improve after 200,000 iterations
+Summary:           Average points per game: 30
+                   Brain does not appear to improve after 200,000 iterations.
+                   Makes moves which spawn more than 3 player units. Note: Brain can only control 3 player units)
+                   Player units appear to be stuck on the edge of the board quite a bit.
 
 Number of Inputs:  81
-Number of Actions: 12
+Number of Actions: 12  (represents 3 player units)
+Rewards:
+    +5: Killed an enemy
+    +1: Regular move
+    -6: Invalid move
+            - moving player that does not exist
+            - moving player in direction they are already moving
+            - moving player off the board
+    -6: Letting enemy capture the base
+
 Console Output:    train-brain-01-with-81-inputs-console.txt
 Stats Output:      train-brain-01-with-81-inputs-stats.csv
 
