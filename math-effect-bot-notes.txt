@@ -355,3 +355,43 @@ Narrated
 - Using a computer generated voice and subtitles
 - image of speaker in the bottom-left corner, eg. HAL or brain
 - Could upload the video to YouTube to apply subtitles
+
+
+--------------------
+*** Observations ***
+--------------------
+
+--------------
+Train Brain 01
+--------------
+Summary:           Brain does not appear to improve after 200,000 iterations
+
+Number of Inputs:  81
+Number of Actions: 12
+Console Output:    train-brain-01-with-81-inputs-console.txt
+Stats Output:      train-brain-01-with-81-inputs-stats.csv
+
+Overall:           OK
+Training Time:     18.15 hours (65,370,968 ms)
+Training Runs:     2,391,898
+% valid actions:   Stable at 97%
+av. rewards:       Stable at 1.2
+av. points:        Stable at 30
+
+--------------
+Train Brain 02
+--------------
+Summary:           Brain does not appear to learn when provided binary encoded inputs
+
+Number of Inputs:  9  (Note: binary encoded 81 inputs into 9)
+Number of Actions: 12
+Console Output:    train-brain-02-with-9-inputs-console.txt
+Stats Output:      train-brain-02-with-9-inputs-stats.csv
+
+Overall Result:    Bad
+Training Time:     1.22 hours (4,395,303 ms)
+Training Runs:     165,904
+% valid actions:   Decreasing
+av. rewards:       Decreasing
+av. points:        Stable at 6
+

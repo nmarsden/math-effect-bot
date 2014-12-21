@@ -422,6 +422,15 @@ TD.AI = function (game) {
 
         var trainingTime = window.performance.getEntriesByName('measure_training_time')[0].duration;
 
+        console.log("----------------------");
+        console.log("*** Training Stats ***");
+        console.log("----------------------");
+        var statsOutput = "actions, games, valid_actions, av_reward, av_kills, av_points, av_game_time, games_per_min\n";
+        for (var statNum = 0; statNum < this.iterationStats.length; statNum++) {
+            var stat = this.iterationStats[statNum];
+            statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageReward + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerMin + "\n";
+        }
+        console.log(statsOutput);
         console.log("-------------------------------------------------------------------------------------");
         console.log("Training Time (msecs) :" + trainingTime);
         console.log("-------------------------------------------------------------------------------------");
@@ -469,7 +478,8 @@ TD.AI = function (game) {
             // Initialize brain if necessary
             if (!this.brain) {
                 var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
-                var num_actions = 20; // a number in the range 0-19 : that is 4 possible actions for one of 5 possible players
+                var num_actions = 12; // a number in the range 0-11 : that is 4 possible actions for one of 3 possible players
+                //var num_actions = 20; // a number in the range 0-19 : that is 4 possible actions for one of 5 possible players
                 var temporal_window = 1; // amount of temporal memory. 0 = agent lives in-the-moment :)
                 var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
 
@@ -513,7 +523,7 @@ TD.AI = function (game) {
             //game.units
             //game.currentMap.unitIds
             //game.currentMap.bonuses
-            var boardX, boardY, unit, boardStates = [], playerUnits = [];
+            var boardX, boardY, unit, boardStates = [], playerUnits = [], brainInputs;
             for (boardY = 0; boardY < 9; boardY++) {
                 for (boardX = 0; boardX < 9; boardX++) {
                     unit = this.getUnitAtBoardPosition(boardX, boardY);
@@ -540,6 +550,21 @@ TD.AI = function (game) {
             }
             this.previousKilledUnits = this.game.statsKilledUnits;
 
+            // Calculate brainInputs from boardStates
+            //brainInputs = this.populateBrainInputs(boardStates);
+            brainInputs = boardStates;
+
+            // Output brainInputs to console
+            //console.log("----------------------------");
+            //console.log("Brain Inputs as binary");
+            //var pad = "000000000000000000000000000000000000";
+            //for (var brainInputIndex = 0; brainInputIndex<brainInputs.length; brainInputIndex++) {
+            //    var binaryInput = brainInputs[brainInputIndex].toString(2);
+            //    var leftPaddedBinaryInput = pad.substring(0, pad.length - binaryInput.length) + binaryInput;
+            //    console.log(leftPaddedBinaryInput);
+            //}
+            //console.log("----------------------------");
+
             // Loop until valid action is chosen by brain
             var numInvalidMoves = 0;
             do {
@@ -548,7 +573,7 @@ TD.AI = function (game) {
                     this.rewardBrain(-6);
                 }
                 // Get proposed action from brain using board states
-                var action = this.brain.forward(boardStates);
+                var action = this.brain.forward(brainInputs);
 
                 // Convert action to selectPlayerUnit and newDirection
                 var playerIndex = Math.floor(action / 4);
@@ -592,7 +617,7 @@ TD.AI = function (game) {
             if (this.totalGamesPlayed % 400 === 0) {
                 // Calculate Stats
                 var totalActionsForWindow = (this.totalInvalidActions + this.totalValidActions);
-                var percentValidActions = this.totalInvalidActions / totalActionsForWindow;
+                var percentValidActions = this.totalValidActions / totalActionsForWindow;
                 var averageKills = this.totalKills / this.totalIterations;
                 var averagePoints = this.totalPoints / this.totalIterations;
                 var averageReward = this.totalRewards / totalActionsForWindow;
@@ -600,15 +625,15 @@ TD.AI = function (game) {
                 window.performance.measure('measure_training_time_window', 'mark_start_training_window', 'mark_stop_training_window');
                 var trainingTimeWindow = window.performance.getEntriesByName('measure_training_time_window')[0].duration;
                 var averageGameTime = trainingTimeWindow / this.totalIterations;
-                var gamesPerSec = 60000 / averageGameTime;
+                var gamesPerMin = 60000 / averageGameTime;
 
                 this.totalActions += totalActionsForWindow;
 
                 // Save stats
-                this.iterationStats.push({actions: this.totalActions, gamesPlayed: this.totalGamesPlayed, percentValidActions: percentValidActions, averageReward: averageReward, averageKills: averageKills, averagePoints: averagePoints, averageGameTime: averageGameTime, gamesPerSec: gamesPerSec});
+                this.iterationStats.push({actions: this.totalActions, gamesPlayed: this.totalGamesPlayed, percentValidActions: percentValidActions, averageReward: averageReward, averageKills: averageKills, averagePoints: averagePoints, averageGameTime: averageGameTime, gamesPerMin: gamesPerMin});
 
                 // Output Stats
-                console.log("[Total Stats - Actions: " + this.totalActions + ", Games: " + this.totalGamesPlayed + "][Last 400 Games Stats - % Valid actions: " + percentValidActions + ", Av. Reward: " + averageReward + ", Av. Kills: " + averageKills + ", Av. Points: " + averagePoints + ", Av. Game Time (ms): " + averageGameTime + ", Games Per Sec: " + gamesPerSec + "]");
+                console.log("[Total Stats - Actions: " + this.totalActions + ", Games: " + this.totalGamesPlayed + "][Last 400 Games Stats - % Valid actions: " + percentValidActions + ", Av. Reward: " + averageReward + ", Av. Kills: " + averageKills + ", Av. Points: " + averagePoints + ", Av. Game Time (ms): " + averageGameTime + ", Games Per Min: " + gamesPerMin + "]");
 
                 this.totalIterations = 0;
                 this.totalInvalidActions = 0;
@@ -629,10 +654,10 @@ TD.AI = function (game) {
                 console.log("---------------------------------------");
                 console.log("*** Training Stats for 40,000 games ***");
                 console.log("---------------------------------------");
-                var statsOutput = "actions, games, valid_actions, av_reward, av_kills, av_points, av_game_time, games_per_sec\n";
+                var statsOutput = "actions, games, valid_actions, av_reward, av_kills, av_points, av_game_time, games_per_min\n";
                 for (var statNum = 0; statNum < this.iterationStats.length; statNum++) {
                     var stat = this.iterationStats[statNum];
-                    statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageReward + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerSec + "\n";
+                    statsOutput += stat.actions + "," + stat.gamesPlayed + "," + stat.percentValidActions + "," + stat.averageReward + "," + stat.averageKills + "," + stat.averagePoints + "," + stat.averageGameTime + "," + stat.gamesPerMin + "\n";
                 }
                 console.log(statsOutput);
 
@@ -681,6 +706,21 @@ TD.AI = function (game) {
     this.rewardBrain = function(reward) {
         this.brain.backward(reward);
         this.totalRewards += reward;
+    };
+
+    this.populateBrainInputs = function(boardStates) {
+        var brainInputs = [], encodedBoardRowStates = 0, i, power;
+
+        // Binary encode each row in boardStates into a single brainInput
+        for(i=1; i<=81; i++) {
+            power = ((i % 9) == 0) ? 0 : ((9 - (i % 9)) * 4);
+            encodedBoardRowStates += boardStates[i-1] * Math.pow(2, power);
+            if (i % 9 == 0) {
+                brainInputs.push(encodedBoardRowStates);
+                encodedBoardRowStates = 0;
+            }
+        }
+        return brainInputs;
     };
 
     this.isValidMove = function (playerUnit, newDirection) {
