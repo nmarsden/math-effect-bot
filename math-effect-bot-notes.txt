@@ -472,10 +472,24 @@ av. points:         7
 
 
 -----------------------------------------------------------------------------------------
-Train Brain 05: Changed logic for applying the 'Let enemy capture the base' punishment
+Train Brain 05a: Changed logic for applying the 'Let enemy capture the base' punishment
 -----------------------------------------------------------------------------------------
 Summary:            Changed logic for applying the 'Let enemy capture the base' punishment.
                     Only apply this punishment if the player moves off the base without defending
+                    Shows newly trained behaviour of spawning less units and staying in the 'base zone'
+
+Overall:            OK!
+Training Time:      13 hours (48026020 ms)
+Training Runs:      2,245,485
+% valid actions:    96%
+av. rewards:        1.1
+av. points:         23
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 05b: Continue training of 05a
+-----------------------------------------------------------------------------------------
+Summary:            Continue training of 05a
 
 Overall:
 Training Time:
@@ -483,4 +497,3 @@ Training Runs:
 % valid actions:
 av. rewards:
 av. points:
-
