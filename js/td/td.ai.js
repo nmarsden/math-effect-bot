@@ -380,7 +380,7 @@ TD.AI = function (game) {
 
     this.startTraining = function () {
         console.log("**************************");
-        console.log("**  Training Brain 04   **");
+        console.log("**  Training Brain 05   **");
         console.log("**************************");
         this.isAutoPlay = false;
         this.isTraining = true;
@@ -478,7 +478,8 @@ TD.AI = function (game) {
             this.totalPoints += this.game.statsPoints;
 
             // Punish brain for letting the enemy capture the base
-            this.rewardBrain(-100);
+            // TODO Only apply this punishment if an inactive player was moved off the base without attacking an enemy unit
+            this.rewardBrain(-6);
 
             //console.log("training iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "]");
             //console.log("-----------------------------------------------------------------------------------------------------------------");
@@ -673,7 +674,7 @@ TD.AI = function (game) {
         do {
             if (numInvalidMoves > 0) {
                 // punish brain for invalid action
-                this.rewardBrain(-100);
+                this.rewardBrain(-6);
             }
             // Get proposed action from brain using board states
             var action = this.brain.forward(brainInputs);
