@@ -364,7 +364,8 @@ Narrated
 --------------
 Train Brain 01
 --------------
-Summary:           Average points per game: 30
+Summary:           Autoplay best Game:  [*** turns: 26, kills: 9, points: 113 ***]
+                   Average points per game: 30
                    Brain does not appear to improve after 200,000 iterations.
                    Makes moves which spawn more than 3 player units. Note: Brain can only control 3 player units)
                    Player units appear to be stuck on the edge of the board quite a bit.
@@ -390,9 +391,10 @@ Training Runs:     2,391,898
 av. rewards:       Stable at 1.2
 av. points:        Stable at 30
 
---------------
-Train Brain 02
---------------
+
+---------------------------------------
+Train Brain 02: Binary Encoded Input
+---------------------------------------
 Summary:           Brain does not appear to learn when provided binary encoded inputs
 
 Number of Inputs:  9  (Note: binary encoded 81 inputs into 9)
@@ -400,7 +402,7 @@ Number of Actions: 12
 Console Output:    train-brain-02-with-9-inputs-console.txt
 Stats Output:      train-brain-02-with-9-inputs-stats.csv
 
-Overall Result:    Bad
+Overall Result:    Fail!  Did not learn
 Training Time:     1.22 hours (4,395,303 ms)
 Training Runs:     165,904
 % valid actions:   Decreasing
@@ -434,7 +436,7 @@ Rewards:
 Console Output:    train-brain-03-with-81-inputs-console.txt
 Stats Output:      train-brain-03-with-81-inputs-stats.csv
 
-Overall:            Too Slow!
+Overall:            Fail!  Too Slow!
 Training Time:      13.5 hours (48833427 ms)
 Training Runs:      230,710
 % valid actions:    40%
@@ -445,7 +447,7 @@ av. points:         19
 ------------------------------
 Train Brain 03 b) Optimized
 ------------------------------
-Summary:           Same as a) but with an optimization of the check for within the 'base zone', using a lookup table
+Summary:            Same as a) but with an optimization of the check for within the 'base zone', using a lookup table
 
 Overall:
 Training Time:
@@ -453,3 +455,32 @@ Training Runs:
 % valid actions:
 av. rewards:
 av. points:
+
+
+---------------------------------------
+Train Brain 04: Larger punishments
+---------------------------------------
+Summary:            Increased punishments for 'Invalid move' and 'Let enemy capture the base' from -6 to -100
+                    Average points did not increase at all over time
+
+Overall:            Fail!  Average Points did not increase at all
+Training Time:      6 hours (21669069 ms)
+Training Runs:      695,147
+% valid actions:    93%
+av. rewards:        -19
+av. points:         7
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 05: Changed logic for applying the 'Let enemy capture the base' punishment
+-----------------------------------------------------------------------------------------
+Summary:            Changed logic for applying the 'Let enemy capture the base' punishment.
+                    Only apply this punishment if the player moves off the base without defending
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:
+

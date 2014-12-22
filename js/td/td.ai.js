@@ -379,6 +379,9 @@ TD.AI = function (game) {
     };
 
     this.startTraining = function () {
+        console.log("**************************");
+        console.log("**  Training Brain 04   **");
+        console.log("**************************");
         this.isAutoPlay = false;
         this.isTraining = true;
         window.performance.mark('mark_start_training');
@@ -475,7 +478,7 @@ TD.AI = function (game) {
             this.totalPoints += this.game.statsPoints;
 
             // Punish brain for letting the enemy capture the base
-            this.rewardBrain(-6);
+            this.rewardBrain(-100);
 
             //console.log("training iteration# " + this.totalIterations + " [turns: " + this.turn + "][kills: " + this.game.statsKilledUnits + "][points: " + this.game.statsPoints + "]");
             //console.log("-----------------------------------------------------------------------------------------------------------------");
@@ -670,7 +673,7 @@ TD.AI = function (game) {
         do {
             if (numInvalidMoves > 0) {
                 // punish brain for invalid action
-                this.rewardBrain(-6);
+                this.rewardBrain(-100);
             }
             // Get proposed action from brain using board states
             var action = this.brain.forward(brainInputs);
