@@ -497,3 +497,31 @@ Training Runs:
 % valid actions:
 av. rewards:
 av. points:
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 6: Tweaked rewards
+-----------------------------------------------------------------------------------------
+Summary:            Tweaked rewards
+                    - increased 'Killed an enemy' reward from +5 to +10
+                    - decreased 'Let enemy capture the base' reward from -6 to -11
+
+Rewards:
+-> +10: (increased from +5) Killed an enemy
+    +5: Reduced number of player units when more than three player units
+    +5: Moved player unit inside the 'base zone'
+    +1: Regular move
+    -6: Invalid move
+            - moved player that does not exist
+            - moved player in direction they are already moving
+            - moved player off the board
+-> -11: (Decreased from -6) Let enemy capture the base
+    -6: Spawned a unit resulting in more than three player units
+    -6: Moved player unit outside the 'base zone'
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:

@@ -387,7 +387,7 @@ TD.AI = function (game) {
 
     this.startTraining = function () {
         console.log("**************************");
-        console.log("**  Training Brain 05   **");
+        console.log("**  Training Brain 06   **");
         console.log("**************************");
         this.isAutoPlay = false;
         this.isTraining = true;
@@ -489,7 +489,7 @@ TD.AI = function (game) {
             if (this.selectedBasePlayerUnitDirection >= 0) {
                 var winningEnemyUnit = this.game.units[this.game.currentMap.unitIds[4][4]];
                 if (this.oppositeDirectionIndexes[winningEnemyUnit.direction] != this.selectedBasePlayerUnitDirection) {
-                    this.rewardBrain(-6);
+                    this.rewardBrain(-11);
                 }
             }
 
@@ -642,7 +642,7 @@ TD.AI = function (game) {
             // Reward brain for killing the enemy
             var reward = 0;
             if (this.game.statsKilledUnits > this.previousKilledUnits) {
-                reward += 5;
+                reward += 10;
             } else {
                 reward += 1;
             }
