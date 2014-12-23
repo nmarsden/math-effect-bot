@@ -493,11 +493,11 @@ Train Brain 05b: Continue training of 05a
 Summary:            Continue training of 05a
 
 Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Training Time:      23 hours  (or another 10 hours (35824548 ms) from 05a)
+Training Runs:      4,017,002
+% valid actions:    96%
+av. rewards:        1.2
+av. points:         25
 
 
 -----------------------------------------------------------------------------------------
@@ -521,8 +521,8 @@ Rewards:
     -6: Moved player unit outside the 'base zone'
 
 Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Training Time:      9.7 hours (35059365 ms)
+Training Runs:      338,884
+% valid actions:    95%
+av. rewards:        1.4
+av. points:         20
