@@ -450,11 +450,11 @@ Train Brain 03 b) Optimized
 Summary:            Same as a) but with an optimization of the check for within the 'base zone', using a lookup table
 
 Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Training Time:      25 hours (91262649 ms)
+Training Runs:      7,171,464
+% valid actions:    96%
+av. rewards:        1.8
+av. points:         41
 
 
 ---------------------------------------
