@@ -455,6 +455,7 @@ Training Runs:      7,171,464
 % valid actions:    96%
 av. rewards:        1.8
 av. points:         41
+Top Score:          360
 
 
 ---------------------------------------
