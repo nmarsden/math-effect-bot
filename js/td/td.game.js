@@ -2,10 +2,12 @@
  * Created by Ilya Rubinchik (ilfate) on 12/09/14.
  */
 
-function rand(min, max)
-{
-    return Math.floor(Math.random()*(max-min+1)+min);
+function rand(min, max) {
+    return Random.integer(min, max)(game.randomEngine);
+
+    //return Math.floor(Math.random()*(max-min+1)+min);
 }
+
 function info(data)
 {
     console.info(data);
@@ -88,6 +90,8 @@ TD.Game = function (situation) {
     this.ai         = new TD.AI(this);
 
     this.init = function() {
+        this.randomEngine = Random.engines.mt19937().seed(1);
+
         this.mapConfig  = {};
         this.currentMap = {};
         this.newMap     = {};

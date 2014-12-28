@@ -529,7 +529,7 @@ av. points:         20
 
 
 -----------------------------------------------------------------------------------------
-Train Brain 7: Increased Number of Actions
+Train Brain 7a: Increased Number of Actions
 -----------------------------------------------------------------------------------------
 Summary:          Increased Number of Actions from 12 to 64 to support up to 16 player units
                   Reverted previous reward tweaks to improve training performance
@@ -555,3 +555,45 @@ Training Runs:
 % valid actions:
 av. rewards:
 av. points:
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 7b: Continuing 7a
+-----------------------------------------------------------------------------------------
+Summary:
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 8: Deterministic Game & setting random_action_distribution on brain
+-----------------------------------------------------------------------------------------
+Summary:            Changed game to be deterministic using a seeded random engine
+                    Set random_action_distribution for brain to reduce invalid moves
+
+Overall:            Fail - did not train!
+Training Time:      16.8 hours (60460883.89399998 ms)
+Training Runs:      225,852
+% valid actions:    6%
+av. rewards:        -5.6
+av. points:         4.5
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 9: Deterministic Game
+-----------------------------------------------------------------------------------------
+Summary:            Changed game to be deterministic using a seeded random engine
+                    Reverted previous change to set random_action_distribution for brain to reduce invalid moves
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:
+
