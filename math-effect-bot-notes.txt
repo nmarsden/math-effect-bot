@@ -526,3 +526,32 @@ Training Runs:      338,884
 % valid actions:    95%
 av. rewards:        1.4
 av. points:         20
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 7: Increased Number of Actions
+-----------------------------------------------------------------------------------------
+Summary:          Increased Number of Actions from 12 to 64 to support up to 16 player units
+                  Reverted previous reward tweaks to improve training performance
+                    - decreased 'Killed an enemy' reward from +10 to +5
+                    - increased 'Let enemy capture the base' reward from -11 to -10
+
+Rewards:
+    +5: Killed an enemy
+    +5: Reduced number of player units when more than three player units
+    +5: Moved player unit inside the 'base zone'
+    +1: Regular move
+    -6: Invalid move
+            - moved player that does not exist
+            - moved player in direction they are already moving
+            - moved player off the board
+    -6: Let enemy capture the base
+    -6: Spawned a unit resulting in more than three player units
+    -6: Moved player unit outside the 'base zone'
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:

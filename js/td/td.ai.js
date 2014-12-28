@@ -395,7 +395,7 @@ TD.AI = function (game) {
 
     this.startTraining = function () {
         console.log("**************************");
-        console.log("**  Training Brain 06   **");
+        console.log("**  Training Brain 07   **");
         console.log("**************************");
         this.isAutoPlay = false;
         this.isTraining = true;
@@ -497,7 +497,7 @@ TD.AI = function (game) {
             if (this.selectedBasePlayerUnitDirection >= 0) {
                 var winningEnemyUnit = this.game.units[this.game.currentMap.unitIds[4][4]];
                 if (this.oppositeDirectionIndexes[winningEnemyUnit.direction] != this.selectedBasePlayerUnitDirection) {
-                    this.rewardBrain(-11);
+                    this.rewardBrain(-6);
                 }
             }
 
@@ -583,7 +583,8 @@ TD.AI = function (game) {
 
     this.initializeBrain = function() {
         var num_inputs = 81; // (9 x 9) inputs for board state, each in range 0-11
-        var num_actions = 12; // a number in the range 0-11 : that is 4 possible actions for one of 3 possible players
+        var num_actions = 64; // a number in the range 0-63 : that is 4 possible actions for one of 16 possible players
+        //var num_actions = 12; // a number in the range 0-11 : that is 4 possible actions for one of 3 possible players
         //var num_actions = 20; // a number in the range 0-19 : that is 4 possible actions for one of 5 possible players
         var temporal_window = 1; // amount of temporal memory. 0 = agent lives in-the-moment :)
         var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
@@ -650,16 +651,16 @@ TD.AI = function (game) {
             // Reward brain for killing the enemy
             var reward = 0;
             if (this.game.statsKilledUnits > this.previousKilledUnits) {
-                reward += 10;
+                reward += 5;
             } else {
                 reward += 1;
             }
-            // Punish for spawning a unit if it results in more than 3 player units
-            if (playerUnits.length > this.previousPlayerUnits && playerUnits.length > 3) {
+            // Punish for spawning a unit if it results in more than 16 player units
+            if (playerUnits.length > this.previousPlayerUnits && playerUnits.length > 16) {
                 reward -= 6;
             }
-            // Reward for reducing player units when previously there were more than 3 player units
-            if (playerUnits.length < this.previousPlayerUnits && this.previousPlayerUnits > 3) {
+            // Reward for reducing player units when previously there were more than 16 player units
+            if (playerUnits.length < this.previousPlayerUnits && this.previousPlayerUnits > 16) {
                 reward += 5;
             }
             // Punish for player moving out of the 'base zone'
