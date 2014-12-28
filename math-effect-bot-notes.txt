@@ -549,18 +549,31 @@ Rewards:
     -6: Spawned a unit resulting in more than three player units
     -6: Moved player unit outside the 'base zone'
 
-Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Overall:            OK - but rewards decreasing at end
+Training Time:      14.3 hours (51563488 ms)
+Training Runs:      614,901
+% valid actions:    90%
+av. rewards:        0.54
+av. points:         19
 
 
 -----------------------------------------------------------------------------------------
-Train Brain 7b: Continuing 7a
+Train Brain 7b: Continuing...
 -----------------------------------------------------------------------------------------
-Summary:
+Summary:            Continuing...
+
+Overall:            OK - av. rewards and av. points increased slightly
+Training Time:      20.9 hours (75357715 ms)
+Training Runs:      1,703,901
+% valid actions:    93%
+av. rewards:        0.96
+av. points:         23
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 7c: Continuing...
+-----------------------------------------------------------------------------------------
+Summary:            Continuing...
 
 Overall:
 Training Time:
