@@ -598,10 +598,23 @@ av. points:         4.5
 
 
 -----------------------------------------------------------------------------------------
-Train Brain 9: Deterministic Game
+Train Brain 9a: Deterministic Game
 -----------------------------------------------------------------------------------------
 Summary:            Changed game to be deterministic using a seeded random engine
                     Reverted previous change to set random_action_distribution for brain to reduce invalid moves
+
+Overall:            Good - highest av. points so far
+Training Time:      7.3 hours (26336438 ms)
+Training Runs:      562,203
+% valid actions:    95%
+av. rewards:        1.69
+av. points:         60
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 9b: Continuing...
+-----------------------------------------------------------------------------------------
+Summary:            Continuing...
 
 Overall:
 Training Time:
