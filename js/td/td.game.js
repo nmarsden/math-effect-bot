@@ -88,9 +88,10 @@ $(document).ready(function() {
 TD.Game = function (situation) {
     this.facet      = new TD.Facet(this);
     this.ai         = new TD.AI(this);
+    this.randomSeed = 1;
 
     this.init = function() {
-        this.randomEngine = Random.engines.mt19937().seed(1);
+        this.randomEngine = Random.engines.mt19937().seed(this.randomSeed);
 
         this.mapConfig  = {};
         this.currentMap = {};
