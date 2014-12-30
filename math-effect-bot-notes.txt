@@ -616,6 +616,19 @@ Train Brain 9b: Continuing...
 -----------------------------------------------------------------------------------------
 Summary:            Continuing...
 
+Overall:            Very Good - highest av. points so far
+Training Time:      21 hours (75712621 ms)
+Training Runs:      1,873,026
+% valid actions:    94%
+av. rewards:        1.75
+av. points:         109
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 9c: Continuing...
+-----------------------------------------------------------------------------------------
+Summary:            Continuing...
+
 Overall:
 Training Time:
 Training Runs:
@@ -623,3 +636,29 @@ Training Runs:
 av. rewards:
 av. points:
 
+
+-----------------------------------------------------------------------------------------
+Train Brain 10: Introduced reward to encourage spawning units
+-----------------------------------------------------------------------------------------
+Summary:            Added reward of +3 for spawning a unit resulting in no more than 16 player units
+
+Rewards:
+    +5: Killed an enemy
+    +5: Reduced number of player units when more than 16 player units
+    +5: Moved player unit inside the 'base zone'
+    +3: Spawned a unit resulting in no more than 16 player units
+    +1: Regular move
+    -6: Invalid move
+            - moved player that does not exist
+            - moved player in direction they are already moving
+            - moved player off the board
+    -6: Let enemy capture the base
+    -6: Spawned a unit resulting in more than 16 player units
+    -6: Moved player unit outside the 'base zone'
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:
