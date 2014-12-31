@@ -643,6 +643,19 @@ Train Brain 9c: Continuing...
 Summary:            Continuing...
 
 Overall:
+Training Time:      26 hours (93587236 ms)
+Training Runs:      3,742,745
+% valid actions:    94%
+av. rewards:        1.6
+av. points:         105
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 9d: Continuing...
+-----------------------------------------------------------------------------------------
+Summary:            Continuing...
+
+Overall:
 Training Time:
 Training Runs:
 % valid actions:
@@ -651,7 +664,7 @@ av. points:
 
 
 -----------------------------------------------------------------------------------------
-Train Brain 10: Introduced reward to encourage spawning units
+Train Brain 10a: Introduced reward to encourage spawning units
 -----------------------------------------------------------------------------------------
 Summary:            Added reward of +3 for spawning a unit resulting in no more than 16 player units
 
@@ -668,6 +681,19 @@ Rewards:
     -6: Let enemy capture the base
     -6: Spawned a unit resulting in more than 16 player units
     -6: Moved player unit outside the 'base zone'
+
+Overall:
+Training Time:
+Training Runs:
+% valid actions:
+av. rewards:
+av. points:
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 10b: Continuing...
+-----------------------------------------------------------------------------------------
+Summary:            Continuing...
 
 Overall:
 Training Time:
