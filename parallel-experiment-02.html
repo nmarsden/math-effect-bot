@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Parallel Experiment - 02</title>
+</head>
+<body onload="startExperiment()">
+
+<script type="text/javascript" src="/js/td/parallel.js"></script>
+<script type="text/javascript" src="parallel-experiment-02.js"></script>
+
+<div>
+    <h1>Parallel Experiment 02</h1>
+
+    <h2>Execute 8 threads in parallel</h2>
+    <h3>Using global.env to provide shared input</h3>
+    <h3>Data is an array of 8 elements with values 0-7, one for each thread</h3>
+    <h3>Using require() to import the rand() function into the worker threads</h3>
+    <h3>Using map() to spawn 8 threads</h3>
+    <h3>Using reduce() to determine best result</h3>
+</div>
+
+</body>
+
+</html>
