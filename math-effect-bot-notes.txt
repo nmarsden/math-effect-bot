@@ -630,7 +630,7 @@ Train Brain 9b: Continuing...
 Summary:            Continuing...
 
 Overall:            Very Good - highest av. points so far
-Training Time:      21 hours (75712621 ms)
+Training Time:      21 hours (75,712,621 ms)
 Training Runs:      1,873,026
 % valid actions:    94%
 av. rewards:        1.75
@@ -643,7 +643,7 @@ Train Brain 9c: Continuing...
 Summary:            Continuing...
 
 Overall:
-Training Time:      26 hours (93587236 ms)
+Training Time:      26 hours (93,587,236 ms)
 Training Runs:      3,742,745
 % valid actions:    94%
 av. rewards:        1.6
@@ -683,11 +683,11 @@ Rewards:
     -6: Moved player unit outside the 'base zone'
 
 Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Training Time:      46 hours (166,657,239 ms)
+Training Runs:      1,897,229
+% valid actions:    95%
+av. rewards:        3.1
+av. points:         32
 
 
 -----------------------------------------------------------------------------------------
