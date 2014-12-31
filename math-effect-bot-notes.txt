@@ -575,6 +575,19 @@ Train Brain 7c: Continuing...
 -----------------------------------------------------------------------------------------
 Summary:            Continuing...
 
+Overall:            OK - av. rewards and av. points increased slightly again
+Training Time:      54.5 hours (196203029 ms)
+Training Runs:      4,154,575
+% valid actions:    94%
+av. rewards:        1.2
+av. points:         28
+
+
+-----------------------------------------------------------------------------------------
+Train Brain 7d: Continuing...
+-----------------------------------------------------------------------------------------
+Summary:            Continuing...
+
 Overall:
 Training Time:
 Training Runs:
