@@ -819,5 +819,4 @@ TD.AI = function (game) {
             }
         }
     };
-
 };
