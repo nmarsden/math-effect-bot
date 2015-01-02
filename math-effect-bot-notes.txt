@@ -630,7 +630,7 @@ Train Brain 9b: Continuing...
 Summary:            Continuing...
 
 Overall:            Very Good - highest av. points so far
-Training Time:      21 hours (75,712,621 ms)
+Training Time:      28.3 hours (7.3 hours + 21 hours (75,712,621 ms))
 Training Runs:      1,873,026
 % valid actions:    94%
 av. rewards:        1.75
@@ -643,7 +643,7 @@ Train Brain 9c: Continuing...
 Summary:            Continuing...
 
 Overall:
-Training Time:      26 hours (93,587,236 ms)
+Training Time:      54.3 hours (28.3 hours + 26 hours (93,587,236 ms))
 Training Runs:      3,742,745
 % valid actions:    94%
 av. rewards:        1.6
@@ -656,11 +656,11 @@ Train Brain 9d: Continuing...
 Summary:            Continuing...
 
 Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Training Time:      97.3 hours (54.3 hours + 43 hours (154,633,479 ms))
+Training Runs:      6,694,058
+% valid actions:    95%
+av. rewards:        1.8
+av. points:         101
 
 
 -----------------------------------------------------------------------------------------
