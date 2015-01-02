@@ -696,8 +696,8 @@ Train Brain 10b: Continuing...
 Summary:            Continuing...
 
 Overall:
-Training Time:
-Training Runs:
-% valid actions:
-av. rewards:
-av. points:
+Training Time:      89 hours (46 hours + 43 hours (154,807,540 ms))
+Training Runs:      3,742,329
+% valid actions:    95%
+av. rewards:        3.1
+av. points:         33
